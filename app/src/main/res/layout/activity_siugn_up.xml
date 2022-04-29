@@ -111,7 +111,7 @@
         android:layout_marginTop="50dp"
         android:layout_marginEnd="146dp"
         android:layout_marginBottom="259dp"
-        android:text="Button"
+        android:text="Đăng Ký"
         android:backgroundTint="#3EB4EA"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

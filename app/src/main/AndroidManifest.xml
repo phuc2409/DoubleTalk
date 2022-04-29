@@ -10,23 +10,26 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DualTalk">
         <activity
+            android:name=".View.Main"
+            android:exported="false" />
+        <activity
+            android:name=".View.ForgotPassword"
+            android:exported="false" />
+        <activity
             android:name=".View.SiugnUp"
             android:exported="false" />
         <activity
             android:name=".View.Login"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name=".MainActivity"
-            android:exported="false">
-
-        </activity>
+            android:name=".View.MainActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
