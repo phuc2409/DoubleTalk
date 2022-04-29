@@ -25,7 +25,7 @@
         <EditText
             android:id="@+id/editRetypePassword"
             style="@style/modifiedEditText"
-            android:hint="Password"
+            android:hint="Retype-Password"
             android:inputType="textPassword"
             android:maxLines="1"
             android:textSize="15dp"
