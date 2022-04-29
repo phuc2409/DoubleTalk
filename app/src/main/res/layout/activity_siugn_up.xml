@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".View.SiugnUp">
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/txtinputretypepassword"
+        style="@style/parent"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="21dp"
+        android:layout_marginEnd="27dp"
+        app:boxCornerRadiusBottomEnd="15dp"
+        app:boxCornerRadiusBottomStart="15dp"
+        app:boxCornerRadiusTopEnd="15dp"
+        app:boxCornerRadiusTopStart="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputPassword"
+        app:passwordToggleEnabled="true"
+        tools:ignore="MissingConstraints">
+
+        <EditText
+            android:id="@+id/editRetypePassword"
+            style="@style/modifiedEditText"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:textSize="15dp"
+            tools:layout_editor_absoluteX="38dp"
+            tools:layout_editor_absoluteY="326dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputPassword"
+        style="@style/parent"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="27dp"
+        app:boxCornerRadiusBottomEnd="15dp"
+        app:boxCornerRadiusBottomStart="15dp"
+        app:boxCornerRadiusTopEnd="15dp"
+        app:boxCornerRadiusTopStart="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputEmail"
+        app:passwordToggleEnabled="true"
+        tools:ignore="MissingConstraints">
+
+        <EditText
+            android:id="@+id/editTextPassword"
+            style="@style/modifiedEditText"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:textSize="15dp"
+            tools:layout_editor_absoluteX="38dp"
+            tools:layout_editor_absoluteY="257dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputEmail"
+        style="@style/parent"
+        android:layout_marginStart="38dp"
+        android:layout_marginTop="61dp"
+        android:layout_marginEnd="29dp"
+        app:boxCornerRadiusBottomEnd="15dp"
+        app:boxCornerRadiusBottomStart="15dp"
+        app:boxCornerRadiusTopEnd="15dp"
+        app:boxCornerRadiusTopStart="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2">
+
+        <EditText
+            android:id="@+id/editTextEmail"
+            style="@style/modifiedEditText"
+            android:hint="Email/SĐT"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
+            android:textSize="15dp"
+            tools:layout_editor_absoluteX="38dp"
+            tools:layout_editor_absoluteY="185dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="209dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="171dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="146dp"
+        android:layout_marginBottom="259dp"
+        android:text="Button"
+        android:backgroundTint="#3EB4EA"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtinputretypepassword" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
