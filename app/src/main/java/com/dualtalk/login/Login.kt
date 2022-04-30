@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import com.dualtalk.MainActivity.MainActivity
 import com.dualtalk.R
 import com.dualtalk.databinding.ActivityLoginBinding
 import com.dualtalk.signup.SignupActivity
@@ -14,6 +15,7 @@ import kotlinx.android.synthetic.main.activity_login.*
 class Login : AppCompatActivity() {
     private lateinit var databiding : ActivityLoginBinding
     private lateinit var viewModel: Login_ViewModel
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +35,8 @@ class Login : AppCompatActivity() {
         viewModel.UiLoginState.observe(this){
             if(it == Login_ViewModel.LoginState.Success){
                 Toast.makeText(this, "Login Success", Toast.LENGTH_SHORT).show()
+                var intent : Intent = Intent(this@Login , MainActivity::class.java)
+                startActivity(intent)
             }
 
             if(it == Login_ViewModel.LoginState.Fail){

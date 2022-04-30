@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DualTalk">
         <activity
+            android:name=".MainActivity.MainActivity"
+            android:exported="false" />
+        <activity
             android:name=".signup.SignupActivity"
             android:exported="false" />
         <activity
