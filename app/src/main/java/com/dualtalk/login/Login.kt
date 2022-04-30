@@ -1,5 +1,6 @@
 package com.dualtalk.login
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -7,6 +8,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.dualtalk.R
 import com.dualtalk.databinding.ActivityLoginBinding
+import com.dualtalk.signup.SignupActivity
+import kotlinx.android.synthetic.main.activity_login.*
 
 class Login : AppCompatActivity() {
     private lateinit var databiding : ActivityLoginBinding
@@ -20,6 +23,11 @@ class Login : AppCompatActivity() {
 
         databiding.btndangnhap.setOnClickListener{
             viewModel.login(databiding.editTextEmail.text.toString() , databiding.editTextPassword.text.toString())
+        }
+
+        databiding.SignUp.setOnClickListener{
+            val intent = Intent(this@Login , SignupActivity::class.java)
+            startActivity(intent)
         }
 
         viewModel.UiLoginState.observe(this){

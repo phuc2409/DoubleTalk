@@ -10,13 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DualTalk">
         <activity
-            android:name=".View.Main"
-            android:exported="false" />
-        <activity
-            android:name=".View.ForgotPassword"
-            android:exported="false" />
-        <activity
-            android:name=".View.SignUp"
+            android:name=".signup.SignupActivity"
             android:exported="false" />
         <activity
             android:name=".login.Login"
@@ -27,9 +21,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".View.MainActivity"
-            android:exported="false" />
     </application>
 
 </manifest>
