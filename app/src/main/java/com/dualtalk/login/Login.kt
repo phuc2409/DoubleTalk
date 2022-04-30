@@ -16,7 +16,6 @@ class Login : AppCompatActivity() {
     private lateinit var databiding : ActivityLoginBinding
     private lateinit var viewModel: Login_ViewModel
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         databiding = DataBindingUtil.setContentView(this ,R.layout.activity_login)
@@ -35,7 +34,7 @@ class Login : AppCompatActivity() {
         viewModel.UiLoginState.observe(this){
             if(it == Login_ViewModel.LoginState.Success){
                 Toast.makeText(this, "Login Success", Toast.LENGTH_SHORT).show()
-                var intent : Intent = Intent(this@Login , MainActivity::class.java)
+                var intent : Intent = Intent(this@Login, MainActivity::class.java)
                 startActivity(intent)
             }
 
