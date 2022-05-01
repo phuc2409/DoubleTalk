@@ -3,15 +3,18 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android/DualTalk/app/src/main/res/layout/activity_chat.xml" value="0.33" />
+        <entry key="..\:/Android/DualTalk/app/src/main/res/layout/activity_login.xml" value="0.35648148148148145" />
         <entry key="..\:/Android/DualTalk/app/src/main/res/layout/activity_main.xml" value="0.34307692307692306" />
+        <entry key="..\:/Android/DualTalk/app/src/main/res/layout/fragment_chat.xml" value="0.35648148148148145" />
+        <entry key="..\:/Android/DualTalk/app/src/main/res/layout/item_message.xml" value="0.34629629629629627" />
         <entry key="..\:/AndroidSaved/ThucTapChuyenMon/BaiTapLon/DualTalk/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1355" />
         <entry key="..\:/AndroidSaved/ThucTapChuyenMon/BaiTapLon/DualTalk/app/src/main/res/drawable/ic_baseline_message_24.xml" value="0.1355" />
         <entry key="..\:/AndroidSaved/ThucTapChuyenMon/BaiTapLon/DualTalk/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1355" />
-        <entry key="..\:/AndroidSaved/ThucTapChuyenMon/BaiTapLon/DualTalk/app/src/main/res/layout/activity_login.xml" value="0.22" />
+        <entry key="..\:/AndroidSaved/ThucTapChuyenMon/BaiTapLon/DualTalk/app/src/main/res/layout/activity_login.xml" value="0.20416666666666666" />
         <entry key="..\:/AndroidSaved/ThucTapChuyenMon/BaiTapLon/DualTalk/app/src/main/res/layout/activity_mainFragment.xml" value="0.20416666666666666" />
         <entry key="..\:/AndroidSaved/ThucTapChuyenMon/BaiTapLon/DualTalk/app/src/main/res/layout/activity_signup.xml" value="0.25" />
         <entry key="..\:/AndroidSaved/ThucTapChuyenMon/BaiTapLon/DualTalk/app/src/main/res/layout/activity_siugn_up.xml" value="0.20416666666666666" />
-        <entry key="..\:/DualTalk/app/src/main/res/drawable/switch_trcks.xml" value="0.147" />
         <entry key="..\:/DualTalk/app/src/main/res/layout/activity_doan_chat.xml" value="0.20108695652173914" />
         <entry key="..\:/DualTalk/app/src/main/res/layout/activity_forgot_password.xml" value="0.20108695652173914" />
         <entry key="..\:/DualTalk/app/src/main/res/layout/activity_login.xml" value="0.20606884057971014" />
