@@ -1,19 +1,12 @@
-package com.dualtalk.login
+package com.dualtalk.activity.login
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
-import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProvider
-import com.dualtalk.MainActivity.MainActivity
 import com.dualtalk.R
-import com.dualtalk.databinding.ActivityLoginBinding
-import com.dualtalk.signup.SignupActivity
 import kotlinx.android.synthetic.main.activity_login.*
 
-class Login : AppCompatActivity() {
+class LoginActivity : AppCompatActivity() {
 //    private lateinit var databiding : ActivityLoginBinding
 //    private lateinit var viewModel: Login_ViewModel
 
@@ -21,18 +14,16 @@ class Login : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         signUp.setOnClickListener {
-            signUp.background = resources.getDrawable(R.drawable.switch_trcks,null)
+            signUp.background = resources.getDrawable(R.drawable.switch_trcks, null)
             signIn.background = null
             signuplayout.visibility = View.VISIBLE
             loginlayout.visibility = View.GONE
-
         }
         signIn.setOnClickListener {
-            signIn.background = resources.getDrawable(R.drawable.switch_trcks,null)
+            signIn.background = resources.getDrawable(R.drawable.switch_trcks, null)
             signUp.background = null
             loginlayout.visibility = View.VISIBLE
             signuplayout.visibility = View.GONE
-
         }
 //        databiding = DataBindingUtil.setContentView(this ,R.layout.activity_login)
 //        viewModel = ViewModelProvider(this).get(Login_ViewModel::class.java)
@@ -53,11 +44,5 @@ class Login : AppCompatActivity() {
 //                Toast.makeText(this, "Danh nhap that bai", Toast.LENGTH_SHORT).show()
 //            }
 //        }
-
-
-
-
-
     }
-
 }

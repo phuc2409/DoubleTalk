@@ -1,4 +1,4 @@
-package com.dualtalk.chat
+package com.dualtalk.activity.chat
 
 import android.util.Log
 import androidx.databinding.Observable
@@ -24,14 +24,19 @@ class ChatViewModel : ViewModel(), Observable {
         //todo: đang cập nhật toàn bộ tin nhắn, chỉ cập nhật tin nhắn mới
         db.collection("messages").orderBy("createdAt").addSnapshotListener { value, e ->
             if (e != null) {
-                Log.w("Message", "Listen failed.", e)
+                Log.e("Message", "Listen failed.", e)
                 return@addSnapshotListener
             }
 
             val messages = ArrayList<MessageModel>()
 
             for (i in value!!) {
-                val message = MessageModel(i.getLong("sendId"), i.getLong("receiveId"), i.getString("message"), i.getTimestamp("createdAt"))
+                val message = MessageModel(
+                    i.getLong("sendId"),
+                    i.getLong("receiveId"),
+                    i.getString("message"),
+                    i.getTimestamp("createdAt")
+                )
                 Log.d("Message", message.toString())
                 messages.add(message)
             }

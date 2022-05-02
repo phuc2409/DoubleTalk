@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DualTalk">
         <activity
-            android:name=".chat.ChatActivity"
+            android:name="com.dualtalk.activity.chat.ChatActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,13 +19,19 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity.MainActivity"
+            android:name="com.dualtalk.activity.main.MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.dualtalk.activity.signup.SignupActivity"
             android:exported="false" />
         <activity
-            android:name=".signup.SignupActivity"
-            android:exported="false" />
-        <activity
-            android:name=".login.Login"
+            android:name="com.dualtalk.activity.login.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

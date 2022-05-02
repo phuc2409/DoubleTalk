@@ -24,7 +24,7 @@ class MessageRepo {
                 Log.d("Send message", "DocumentSnapshot added with ID: ${documentReference.id}")
             }
             .addOnFailureListener { e ->
-                Log.w("Send message", "Error adding document", e)
+                Log.e("Send message", "Error adding document", e)
             }
     }
 }

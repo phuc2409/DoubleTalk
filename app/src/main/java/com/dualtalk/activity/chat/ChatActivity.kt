@@ -1,4 +1,4 @@
-package com.dualtalk.chat
+package com.dualtalk.activity.chat
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

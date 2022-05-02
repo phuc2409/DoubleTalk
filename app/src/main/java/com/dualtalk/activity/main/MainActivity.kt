@@ -1,4 +1,4 @@
-package com.dualtalk.MainActivity
+package com.dualtalk.activity.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -22,8 +22,7 @@ class MainActivity : AppCompatActivity() {
 
         val bottomnavigation = findViewById<BottomNavigationView>(R.id.bottomnavigation)
         bottomnavigation.setOnNavigationItemSelectedListener {
-            when(it.itemId)
-            {
+            when (it.itemId) {
                 R.id.doanchat -> makeCurrentFragment(chat)
                 R.id.tincho -> makeCurrentFragment(tinnhancho)
                 R.id.settings -> makeCurrentFragment(setting)
@@ -31,10 +30,10 @@ class MainActivity : AppCompatActivity() {
             true
         }
     }
-    private fun makeCurrentFragment(fragment: Fragment)
-    {
+
+    private fun makeCurrentFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction().apply {
-            replace(R.id.doanchat,fragment)
+            replace(R.id.frame, fragment)
             commit()
         }
     }

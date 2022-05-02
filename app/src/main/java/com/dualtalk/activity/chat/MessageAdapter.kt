@@ -1,4 +1,4 @@
-package com.dualtalk.chat
+package com.dualtalk.activity.chat
 
 import android.view.Gravity
 import android.view.LayoutInflater

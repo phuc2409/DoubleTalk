@@ -1,4 +1,4 @@
-package com.dualtalk.chat
+package com.dualtalk.activity.chat
 
 import com.google.firebase.Timestamp
 import com.google.firebase.database.IgnoreExtraProperties

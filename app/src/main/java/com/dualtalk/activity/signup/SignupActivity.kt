@@ -1,4 +1,4 @@
-package com.dualtalk.signup
+package com.dualtalk.activity.signup
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

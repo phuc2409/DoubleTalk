@@ -1,13 +1,11 @@
-package com.dualtalk.login
+package com.dualtalk.activity.login
 
-class User (email:String , password : String , name: String){
+class UserModel(email: String, password: String, name: String) {
     var email: String
     var password: String
     var name: String
 
-
-    constructor(email: String , password: String) : this(email ,password  , "Unknown")
-    {
+    constructor(email: String, password: String) : this(email, password, "Unknown") {
         this.email = email
         this.password = password
     }
@@ -17,9 +15,4 @@ class User (email:String , password : String , name: String){
         this.password = password
         this.name = name
     }
-
-
-
-
-
 }
