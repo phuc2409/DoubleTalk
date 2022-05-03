@@ -5,8 +5,9 @@ import com.google.firebase.database.IgnoreExtraProperties
 
 @IgnoreExtraProperties
 class MessageModel(
-    val sendId: Long? = null,
-    val receiveId: Long? = null,
+    val id: String,
+    val sendId: String? = null,
+    val receiveId: String? = null,
     val message: String? = null,
     val createdAt: Timestamp? = null
 ) {

@@ -65,6 +65,7 @@
                 android:id="@+id/buttonSend"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:enabled="false"
                 android:text="Send" />
 
         </LinearLayout>

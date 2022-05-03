@@ -27,4 +27,33 @@ class MessageRepo {
                 Log.e("Send message", "Error adding document", e)
             }
     }
+
+    fun createChat(receiveId: String, receiveName: String) {
+        val participantIds: ArrayList<String> = arrayListOf(Constant.sendId, receiveId)
+        participantIds.sort()
+        val participantNames: ArrayList<String> = ArrayList()
+        if (participantIds[0] == Constant.sendId) {
+            participantNames.add(Constant.sendName)
+            participantNames.add(receiveName)
+        } else {
+            participantNames.add(Constant.sendName)
+            participantNames.add(receiveName)
+        }
+
+        val model = hashMapOf(
+            "participantIds" to participantIds,
+            "participantNames" to participantNames,
+            "latestMessage" to "",
+            "updatedAt" to FieldValue.serverTimestamp()
+        )
+
+        database.collection("chats")
+            .add(model)
+            .addOnSuccessListener { documentReference ->
+                Log.d("Create chat", "DocumentSnapshot added with ID: ${documentReference.id}")
+            }
+            .addOnFailureListener { e ->
+                Log.e("Create chat", "Error adding document", e)
+            }
+    }
 }

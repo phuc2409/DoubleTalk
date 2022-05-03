@@ -32,8 +32,9 @@ class ChatViewModel : ViewModel(), Observable {
 
             for (i in value!!) {
                 val message = MessageModel(
-                    i.getLong("sendId"),
-                    i.getLong("receiveId"),
+                    i.id,
+                    i.getString("sendId"),
+                    i.getString("receiveId"),
                     i.getString("message"),
                     i.getTimestamp("createdAt")
                 )

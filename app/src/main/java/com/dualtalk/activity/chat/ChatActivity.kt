@@ -2,6 +2,8 @@ package com.dualtalk.activity.chat
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -26,10 +28,27 @@ class ChatActivity : AppCompatActivity() {
             viewModel.sendMessage(dataBinding.editTextMessage.text.toString())
         }
 
+        dataBinding.editTextMessage.addTextChangedListener(object : TextWatcher {
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                dataBinding.buttonSend.isEnabled = p0.toString() != ""
+            }
+        })
+
         dataBinding.recyclerView.layoutManager = LinearLayoutManager(this)
 
         viewModel.uiState.observe(this) {
             if (it == ChatViewModel.ChatState.Success) {
+                dataBinding.editTextMessage.text.clear()
+
                 val messageAdapter = MessageAdapter(viewModel.model)
                 dataBinding.recyclerView.adapter = messageAdapter
                 dataBinding.recyclerView.scrollToPosition(viewModel.model.size - 1)
