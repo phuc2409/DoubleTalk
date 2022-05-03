@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.dualtalk.R
 import com.dualtalk.common.Constant
-import java.text.SimpleDateFormat
+import com.dualtalk.helper.DateTimeHelper
 import kotlin.collections.ArrayList
 
 class MessageAdapter(private val list: ArrayList<MessageModel>) :
@@ -34,9 +34,7 @@ class MessageAdapter(private val list: ArrayList<MessageModel>) :
         holder.textViewMessage.text = model.message
 
         if (model.createdAt != null) {
-            val sdf = SimpleDateFormat("dd/MM/yyyy hh:mm:ss")
-            val netDate = model.createdAt.toDate()
-            holder.textViewCreatedAt.text = "Created at: ${sdf.format(netDate)}"
+            holder.textViewCreatedAt.text = "Created at: ${DateTimeHelper.timestampToDateTimeString(model.createdAt)}"
         }
     }
 

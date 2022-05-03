@@ -6,6 +6,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dualtalk.R
 import com.dualtalk.databinding.ActivityChatBinding
@@ -44,6 +45,12 @@ class ChatActivity : AppCompatActivity() {
         })
 
         dataBinding.recyclerView.layoutManager = LinearLayoutManager(this)
+        dataBinding.recyclerView.addItemDecoration(
+            DividerItemDecoration(
+                this,
+                DividerItemDecoration.VERTICAL
+            )
+        )
 
         viewModel.uiState.observe(this) {
             if (it == ChatViewModel.ChatState.Success) {
