@@ -59,7 +59,8 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="Message"
-                android:inputType="text" />
+                android:inputType="textMultiLine"
+                android:maxLines="6" />
 
             <Button
                 android:id="@+id/buttonSend"

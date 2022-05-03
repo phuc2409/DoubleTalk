@@ -25,14 +25,20 @@
                 android:id="@+id/textViewName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:ellipsize="end"
                 android:gravity="center_vertical"
+                android:maxLines="1"
+                android:padding="5dp"
                 android:text="TextView" />
 
             <TextView
                 android:id="@+id/textViewMessage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:ellipsize="end"
                 android:gravity="center_vertical"
+                android:maxLines="1"
+                android:padding="5dp"
                 android:text="TextView" />
 
         </LinearLayout>
@@ -42,6 +48,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
+            android:padding="5dp"
             android:text="TextView" />
 
     </LinearLayout>
