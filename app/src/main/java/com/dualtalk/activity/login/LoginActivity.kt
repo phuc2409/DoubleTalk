@@ -57,19 +57,24 @@ class LoginActivity : AppCompatActivity() {
         signinbtn.setOnClickListener {
             val emailsignin  = findViewById<TextInputEditText>(R.id.email)
             val passwordsignin = findViewById<TextInputEditText>(R.id.pasword)
-            FirebaseAuth.getInstance().signInWithEmailAndPassword(emailsignin.text.toString().trim(),passwordsignin.text.toString().trim()).addOnCompleteListener {
-                task ->
-                if(task.isSuccessful)
-                {
-                    var intent : Intent = Intent(this@LoginActivity,ChatActivity::class.java)
-                    startActivity(intent)
-                }
-                else
-                {
-                    Toast.makeText(this@LoginActivity,"Email or Password is invalid",Toast.LENGTH_SHORT).show()
+
+            if(emailsignin.text.toString().trim().equals("") || passwordsignin.text.toString().trim().equals("")){
+                Toast.makeText(this@LoginActivity,"Email or Password is null",Toast.LENGTH_SHORT).show()
+            }
+            else{
+                FirebaseAuth.getInstance().signInWithEmailAndPassword(emailsignin.text.toString().trim(),passwordsignin.text.toString().trim()).addOnCompleteListener {
+                        task ->
+                    if(task.isSuccessful)
+                    {
+                        var intent : Intent = Intent(this@LoginActivity,ChatActivity::class.java)
+                        startActivity(intent)
+                    }
+                    else
+                    {
+                        Toast.makeText(this@LoginActivity,"Email or Password is invalid",Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
-
         }
     }
 }
