@@ -3,12 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.SettingFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="SettingFragment" />
+   <com.google.android.material.imageview.ShapeableImageView
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       app:shapeAppearanceOverlay="@style/circleImage"
+       app:strokeWidth="1dp"
+       app:strokeColor="@color/white"
+       android:src="@drawable/ic_gg"/>
 
 </FrameLayout>

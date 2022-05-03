@@ -9,4 +9,8 @@
 
         <item name="android:backgroundTint">#FFFFFF</item>
     </style>
+    <style name="circleImage">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
 </resources>
