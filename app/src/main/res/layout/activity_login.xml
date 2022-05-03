@@ -4,7 +4,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:background="@drawable/backgroundlogin"
+
         android:layout_height="match_parent"
         android:orientation="vertical"
         tools:context=".MainActivity">
@@ -15,7 +15,7 @@
             android:layout_marginTop="40dp"
             android:gravity="center"
             android:text="Double Talk"
-            android:textColor="#CA4A22"
+            android:textColor="#4A6826"
             android:textSize="30dp"
             android:textStyle="bold|normal|italic" />
 
@@ -23,7 +23,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="20dp"
+            android:layout_marginStart="38dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="38dp"
             app:cardCornerRadius="25dp"
             app:cardElevation="10dp"
             app:cardUseCompatPadding="true">
@@ -31,7 +33,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -51,7 +52,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:background="@drawable/switch_trcks"
-
+                        android:paddingBottom="5dp"
                         android:paddingLeft="40dp"
                         android:paddingTop="5dp"
                         android:paddingRight="15dp"
@@ -70,7 +71,7 @@
                         android:paddingRight="15dp"
                         android:text="Sign Up"
                         android:textAlignment="center"
-
+                        android:paddingBottom="5dp"
                         android:textColor="#0E0E0E"
                         android:textSize="16dp"
                         android:textStyle="bold|normal" />
@@ -84,7 +85,7 @@
                     android:background="@color/white"
                     android:gravity="center"
                     android:orientation="vertical"
-                    android:padding="16dp">
+                    android:padding="25dp">
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
@@ -94,7 +95,7 @@
                         android:layout_marginTop="5dp"
                         android:layout_marginBottom="5dp"
                         app:shapeAppearanceOverlay="@style/Button4"
-                        app:boxStrokeColor="#4E4A"
+                        app:boxStrokeColor="#E88262"
                         app:boxStrokeWidth="1dp"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                         android:hint="Email">
@@ -116,7 +117,7 @@
                         android:layout_marginTop="5dp"
                         android:layout_marginBottom="5dp"
                         app:shapeAppearanceOverlay="@style/Button4"
-                        app:boxStrokeColor="#4E4A"
+                        app:boxStrokeColor="#E88262"
                         app:boxStrokeWidth="1dp"
                         app:endIconMode="password_toggle"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
@@ -140,6 +141,19 @@
                         android:textStyle="normal"
                         android:textColor="#2FB7F4"
                         android:textSize="11dp" />
+                    <Button
+                        android:id="@+id/signin"
+                        android:text="Log In"
+                        android:textSize="17sp"
+                        android:textAllCaps="false"
+                        android:elevation="15dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_gravity="center"
+                        app:shapeAppearanceOverlay="@style/Button5"
+                        android:backgroundTint="#42ABB8"
+                        android:layout_width="130dp"
+                        android:layout_height="wrap_content"/>
+
 
                 </LinearLayout>
                 <LinearLayout
@@ -160,7 +174,7 @@
                         android:layout_marginTop="5dp"
                         android:layout_marginBottom="5dp"
                         app:shapeAppearanceOverlay="@style/Button4"
-                        app:boxStrokeColor="#4E4A"
+                        app:boxStrokeColor="#E88262"
                         app:boxStrokeWidth="1dp"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                         android:hint="Email">
@@ -182,7 +196,7 @@
                         android:layout_marginTop="5dp"
                         android:layout_marginBottom="5dp"
                         app:shapeAppearanceOverlay="@style/Button4"
-                        app:boxStrokeColor="#4E4A"
+                        app:boxStrokeColor="#E88262"
                         app:boxStrokeWidth="1dp"
                         app:endIconMode="password_toggle"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
@@ -205,7 +219,7 @@
                         android:layout_marginTop="5dp"
                         android:layout_marginBottom="5dp"
                         app:shapeAppearanceOverlay="@style/Button4"
-                        app:boxStrokeColor="#4E4A"
+                        app:boxStrokeColor="#E88262"
                         app:boxStrokeWidth="1dp"
                         app:endIconMode="password_toggle"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
@@ -220,20 +234,23 @@
                             android:layout_height="wrap_content" />
 
                     </com.google.android.material.textfield.TextInputLayout>
+                    <Button
+                        android:id="@+id/signup"
+                        android:text="Register"
+                        android:textSize="17sp"
+                        android:textAllCaps="false"
+                        android:elevation="15dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_gravity="center"
+                        app:shapeAppearanceOverlay="@style/Button5"
+                        android:backgroundTint="#42ABB8"
+                        android:layout_width="130dp"
+                        android:layout_height="wrap_content"/>
+
 
 
                 </LinearLayout>
-                <Button
-                    android:id="@+id/signin"
-                    android:text="Log In"
-                    android:textSize="17sp"
-                    android:textAllCaps="false"
-                    android:elevation="15dp"
-                    android:layout_gravity="center"
-                    app:shapeAppearanceOverlay="@style/Button5"
-                    android:backgroundTint="#42ABB8"
-                    android:layout_width="130dp"
-                    android:layout_height="wrap_content"/>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -243,23 +260,24 @@
                     android:textSize="20dp"
                     android:textColor="@color/black"/>
                 <LinearLayout
-                    android:layout_marginTop="5dp"
-                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:layout_width="wrap_content"
-                    android:layout_gravity="center"
+                    android:layout_height="wrap_content"
                     android:orientation="horizontal">
                     <ImageView
-                        android:layout_margin="10dp"
+                        android:layout_marginLeft="50dp"
                         android:src="@drawable/ic_face"
                         android:layout_width="45dp"
                         android:layout_height="45dp"/>
                     <ImageView
-                        android:layout_margin="10dp"
+
+                        android:layout_marginLeft="30dp"
                         android:src="@drawable/ic_gg"
                         android:layout_width="45dp"
                         android:layout_height="45dp"/>
                     <ImageView
-                        android:layout_margin="10dp"
+
+                        android:layout_marginLeft="30dp"
                         android:src="@drawable/ic_ig"
                         android:layout_width="45dp"
                         android:layout_height="45dp"/>

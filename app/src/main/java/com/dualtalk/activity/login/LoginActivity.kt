@@ -1,15 +1,19 @@
 package com.dualtalk.activity.login
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
+import android.widget.Toast
 import com.dualtalk.R
+import com.dualtalk.activity.chat.ChatActivity
+import com.google.android.material.textfield.TextInputEditText
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
-//    private lateinit var databiding : ActivityLoginBinding
-//    private lateinit var viewModel: Login_ViewModel
-
+    val ref = FirebaseAuth.getInstance()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -18,31 +22,41 @@ class LoginActivity : AppCompatActivity() {
             signIn.background = null
             signuplayout.visibility = View.VISIBLE
             loginlayout.visibility = View.GONE
+
         }
         signIn.setOnClickListener {
             signIn.background = resources.getDrawable(R.drawable.switch_trcks, null)
             signUp.background = null
             loginlayout.visibility = View.VISIBLE
             signuplayout.visibility = View.GONE
+
         }
-//        databiding = DataBindingUtil.setContentView(this ,R.layout.activity_login)
-//        viewModel = ViewModelProvider(this).get(Login_ViewModel::class.java)
-//
-//
-//        databiding.signin.setOnClickListener{
-//            viewModel.login(databiding.email.text.toString() , databiding.pasword.text.toString())
-//        }
-//
-//        viewModel.UiLoginState.observe(this){
-//            if(it == Login_ViewModel.LoginState.Success){
-//                Toast.makeText(this, "Login Success", Toast.LENGTH_SHORT).show()
-//                var intent : Intent = Intent(this@Login, MainActivity::class.java)
-//                startActivity(intent)
-//            }
-//
-//            if(it == Login_ViewModel.LoginState.Fail){
-//                Toast.makeText(this, "Danh nhap that bai", Toast.LENGTH_SHORT).show()
-//            }
-//        }
+        val email = findViewById<TextInputEditText>(R.id.signupemail)
+        val password = findViewById<TextInputEditText>(R.id.signuppasword)
+        val confirm = findViewById<TextInputEditText>(R.id.signupretypepasword)
+        val btnsignup = findViewById<Button>(R.id.signup)
+        val signinbtn = findViewById<Button>(R.id.signin)
+
+        btnsignup.setOnClickListener {
+            if (password.text.toString().trim() != confirm.text.toString().trim()) {
+                Toast.makeText(applicationContext,"password and confirmpassword is not in valid",
+                    Toast.LENGTH_SHORT)
+            }
+            else
+            {
+                ref.createUserWithEmailAndPassword(
+                    email.text.toString().trim(),
+                    password.text.toString().trim()
+                )
+                var intent : Intent = Intent(this@LoginActivity,ChatActivity::class.java)
+                startActivity(intent)
+
+            }
+
+        }
+        signinbtn.setOnClickListener {
+            var intent : Intent = Intent(this@LoginActivity,ChatActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
