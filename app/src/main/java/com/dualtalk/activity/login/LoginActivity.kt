@@ -5,9 +5,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import com.dualtalk.R
 import com.dualtalk.activity.chat.ChatActivity
+import com.dualtalk.activity.forgotpassword.ForgotPasswordActivity
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_login.*
@@ -36,6 +38,7 @@ class LoginActivity : AppCompatActivity() {
         val confirm = findViewById<TextInputEditText>(R.id.signupretypepasword)
         val btnsignup = findViewById<Button>(R.id.signup)
         val signinbtn = findViewById<Button>(R.id.signin)
+        val txtforgotpass = findViewById<TextView>(R.id.txtviewForgotPassword)
 
         btnsignup.setOnClickListener {
             if (password.text.toString().trim() != confirm.text.toString().trim()) {
@@ -76,5 +79,15 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
         }
+
+
+        //FogotPassword activity
+        txtforgotpass.setOnClickListener{
+            //Toast.makeText(this@LoginActivity , "Vao giao dien quen mat khau" , Toast.LENGTH_SHORT).show()
+            var intent = Intent(this@LoginActivity , ForgotPasswordActivity::class.java)
+            startActivity(intent)
+        }
+
+
     }
 }
