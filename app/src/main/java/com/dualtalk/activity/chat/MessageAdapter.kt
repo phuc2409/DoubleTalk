@@ -24,13 +24,11 @@ class MessageAdapter(private val list: ArrayList<MessageModel>) :
 
         if (model.sendId == Constant.sendId) {
             holder.textViewSendId.gravity = Gravity.END
-            holder.textViewReceiveId.gravity = Gravity.END
             holder.textViewMessage.gravity = Gravity.END
             holder.textViewCreatedAt.gravity = Gravity.END
         }
 
         holder.textViewSendId.text = "Send: ${model.sendId}"
-        holder.textViewReceiveId.text = "Receive: ${model.receiveId}"
         holder.textViewMessage.text = model.message
 
         if (model.createdAt != null) {
@@ -45,7 +43,6 @@ class MessageAdapter(private val list: ArrayList<MessageModel>) :
     class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
         //todo: dataBinding cho đoạn này
         val textViewSendId: TextView = itemView.findViewById(R.id.textViewSendId)
-        val textViewReceiveId: TextView = itemView.findViewById(R.id.textViewReceiveId)
         val textViewMessage: TextView = itemView.findViewById(R.id.textViewMessage)
         val textViewCreatedAt: TextView = itemView.findViewById(R.id.textViewCreatedAt)
     }

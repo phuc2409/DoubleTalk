@@ -13,6 +13,7 @@ import com.dualtalk.activity.chat.ChatActivity
 import com.dualtalk.activity.chat.ChatModel
 import com.dualtalk.common.Constant
 import com.dualtalk.helper.DateTimeHelper
+import com.google.gson.Gson
 
 class AllChatAdapter(private val context: Context, private val list: ArrayList<ChatModel>) :
     RecyclerView.Adapter<AllChatAdapter.ViewHolder>() {
@@ -41,6 +42,9 @@ class AllChatAdapter(private val context: Context, private val list: ArrayList<C
 
         holder.linearLayout.setOnClickListener {
             val intent = Intent(context, ChatActivity::class.java)
+            val gson = Gson()
+            val json: String = gson.toJson(model)
+            intent.putExtra("json", json)
             context.startActivity(intent)
         }
     }

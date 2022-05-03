@@ -1,6 +1,7 @@
 package com.dualtalk.repository
 
 import android.util.Log
+import com.dualtalk.activity.chat.ChatModel
 import com.dualtalk.common.Constant
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
@@ -10,10 +11,10 @@ import com.google.firebase.ktx.Firebase
 class MessageRepo {
     private val database: FirebaseFirestore = Firebase.firestore
 
-    fun sendMessage(message: String) {
+    fun sendMessage(chatModel: ChatModel, message: String) {
         val model = hashMapOf(
+            "chatId" to chatModel.id,
             "sendId" to Constant.sendId,
-            "receiveId" to Constant.receiveId,
             "message" to message,
             "createdAt" to FieldValue.serverTimestamp()
         )
@@ -22,6 +23,7 @@ class MessageRepo {
             .add(model)
             .addOnSuccessListener { documentReference ->
                 Log.d("Send message", "DocumentSnapshot added with ID: ${documentReference.id}")
+                updateChat(chatModel, message)
             }
             .addOnFailureListener { e ->
                 Log.e("Send message", "Error adding document", e)
@@ -54,6 +56,23 @@ class MessageRepo {
             }
             .addOnFailureListener { e ->
                 Log.e("Create chat", "Error adding document", e)
+            }
+    }
+
+    fun updateChat(chatModel: ChatModel, message: String) {
+        val model = hashMapOf(
+            "participantIds" to chatModel.participantIds,
+            "participantNames" to chatModel.participantNames,
+            "latestMessage" to message,
+            "updatedAt" to FieldValue.serverTimestamp()
+        )
+
+        database.collection("chats").document(chatModel.id).update(model)
+            .addOnSuccessListener {
+                Log.d("Update chat", "DocumentSnapshot updated with ID: ${chatModel.id}")
+            }
+            .addOnFailureListener { e ->
+                Log.e("Update chat", "Error updating document", e)
             }
     }
 }

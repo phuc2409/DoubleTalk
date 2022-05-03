@@ -17,37 +17,38 @@ class ChatViewModel : ViewModel(), Observable {
     private val db = Firebase.firestore
 
     val uiState = MutableLiveData<ChatState>()
+    lateinit var chatModel: ChatModel
     var model = ArrayList<MessageModel>()
 
-    init {
-        //todo: filter tin nhắn theo nhận gửi
-        //todo: đang cập nhật toàn bộ tin nhắn, chỉ cập nhật tin nhắn mới
-        db.collection("messages").orderBy("createdAt").addSnapshotListener { value, e ->
-            if (e != null) {
-                Log.e("Message", "Listen failed.", e)
-                return@addSnapshotListener
-            }
-
-            val messages = ArrayList<MessageModel>()
-
-            for (i in value!!) {
-                val message = MessageModel(
-                    i.id,
-                    i.getString("sendId"),
-                    i.getString("receiveId"),
-                    i.getString("message"),
-                    i.getTimestamp("createdAt")
-                )
-                Log.d("Message", message.toString())
-                messages.add(message)
-            }
-            model = messages
-            uiState.postValue(ChatState.Success)
-        }
+    fun sendMessage(message: String) {
+        messageRepo.sendMessage(chatModel, message)
     }
 
-    fun sendMessage(message: String) {
-        messageRepo.sendMessage(message)
+    fun startListener() {
+        //todo: đang cập nhật toàn bộ tin nhắn, chỉ cập nhật tin nhắn mới
+        db.collection("messages").orderBy("createdAt").whereEqualTo("chatId", chatModel.id)
+            .addSnapshotListener { value, e ->
+                if (e != null) {
+                    Log.e("Message", "Listen failed.", e)
+                    return@addSnapshotListener
+                }
+
+                val messages = ArrayList<MessageModel>()
+
+                for (i in value!!) {
+                    val message = MessageModel(
+                        i.id,
+                        i.getString("chatId"),
+                        i.getString("sendId"),
+                        i.getString("message"),
+                        i.getTimestamp("createdAt")
+                    )
+                    Log.d("Message", message.toString())
+                    messages.add(message)
+                }
+                model = messages
+                uiState.postValue(ChatState.Success)
+            }
     }
 
     override fun addOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {

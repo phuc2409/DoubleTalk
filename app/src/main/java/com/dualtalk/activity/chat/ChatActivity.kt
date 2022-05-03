@@ -9,8 +9,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dualtalk.R
+import com.dualtalk.common.Constant
 import com.dualtalk.databinding.ActivityChatBinding
 import com.google.firebase.FirebaseApp
+import com.google.gson.Gson
 
 class ChatActivity : AppCompatActivity() {
     private lateinit var dataBinding: ActivityChatBinding
@@ -24,6 +26,16 @@ class ChatActivity : AppCompatActivity() {
         dataBinding = DataBindingUtil.setContentView(this, R.layout.activity_chat)
         dataBinding.lifecycleOwner = this
         viewModel = ViewModelProvider(this).get(ChatViewModel::class.java)
+
+        val gson = Gson()
+        viewModel.chatModel = gson.fromJson(intent.getStringExtra("json"), ChatModel::class.java)
+        viewModel.startListener()
+
+        if (viewModel.chatModel.participantNames[0] == Constant.sendName && viewModel.chatModel.participantNames.size > 1) {
+            dataBinding.textViewChatName.text = viewModel.chatModel.participantNames[1]
+        } else {
+            dataBinding.textViewChatName.text = viewModel.chatModel.participantNames[0]
+        }
 
         dataBinding.buttonSend.setOnClickListener {
             viewModel.sendMessage(dataBinding.editTextMessage.text.toString())
