@@ -1,3 +1,3 @@
-# DualTalk
+# DoubleTalk
 
 Chat app using Firebase
