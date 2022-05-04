@@ -4,11 +4,11 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.dualtalk.R
 import com.dualtalk.common.Constant
 import com.dualtalk.helper.DateTimeHelper
+import kotlinx.android.synthetic.main.item_message.view.*
 import kotlin.collections.ArrayList
 
 class MessageAdapter(private val list: ArrayList<MessageModel>) :
@@ -21,19 +21,7 @@ class MessageAdapter(private val list: ArrayList<MessageModel>) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val model = list[position]
-
-        if (model.sendId == Constant.sendId) {
-            holder.textViewSendId.gravity = Gravity.END
-            holder.textViewMessage.gravity = Gravity.END
-            holder.textViewCreatedAt.gravity = Gravity.END
-        }
-
-        holder.textViewSendId.text = "Send: ${model.sendId}"
-        holder.textViewMessage.text = model.message
-
-        if (model.createdAt != null) {
-            holder.textViewCreatedAt.text = "Created at: ${DateTimeHelper.timestampToDateTimeString(model.createdAt)}"
-        }
+        holder.bindData(model)
     }
 
     override fun getItemCount(): Int {
@@ -41,9 +29,17 @@ class MessageAdapter(private val list: ArrayList<MessageModel>) :
     }
 
     class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
-        //todo: dataBinding cho đoạn này
-        val textViewSendId: TextView = itemView.findViewById(R.id.textViewSendId)
-        val textViewMessage: TextView = itemView.findViewById(R.id.textViewMessage)
-        val textViewCreatedAt: TextView = itemView.findViewById(R.id.textViewCreatedAt)
+        fun bindData(item: MessageModel) {
+            if (item.sendId == Constant.sendId) {
+                itemView.tvSendId.gravity = Gravity.END
+                itemView.tvMessage.gravity = Gravity.END
+                itemView.tvCreatedAt.gravity = Gravity.END
+            }
+
+            itemView.tvSendId.text = "Send: ${item.sendId}"
+            itemView.tvMessage.text = item.message
+            itemView.tvCreatedAt.text =
+                "Created at: ${DateTimeHelper.timestampToDateTimeString(item.createdAt!!)}"
+        }
     }
 }

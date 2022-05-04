@@ -7,20 +7,20 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textViewSendId"
+            android:id="@+id/tvSendId"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="5dp"
             android:text="Send: " />
 
         <TextView
-            android:id="@+id/textViewMessage"
+            android:id="@+id/tvMessage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="5dp" />
 
         <TextView
-            android:id="@+id/textViewCreatedAt"
+            android:id="@+id/tvCreatedAt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="5dp"

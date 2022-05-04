@@ -1,21 +1,22 @@
 package com.dualtalk.fragment.all_chat
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.dualtalk.R
-import com.dualtalk.databinding.FragmentAllChatBinding
+import com.dualtalk.activity.chat.ChatActivity
+import com.dualtalk.activity.chat.ChatModel
+import com.google.gson.Gson
+import kotlinx.android.synthetic.main.fragment_all_chat.*
 
-
-class AllChatFragment : Fragment() {
-    private lateinit var dataBinding: FragmentAllChatBinding
+class AllChatFragment : Fragment(), IAllChatListener {
     private lateinit var viewModel: AllChatViewModel
+    private var allChatAdapter: AllChatAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -23,17 +24,18 @@ class AllChatFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        dataBinding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_all_chat, container, false)
         viewModel = ViewModelProviders.of(this)[AllChatViewModel::class.java]
-        return dataBinding.root
+        return inflater.inflate(R.layout.fragment_all_chat, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupView()
+    }
 
-        dataBinding.recyclerView.layoutManager = LinearLayoutManager(context)
-        dataBinding.recyclerView.addItemDecoration(
+    private fun setupView() {
+        allChatAdapter = AllChatAdapter(this, viewModel.model)
+        recyclerView.addItemDecoration(
             DividerItemDecoration(
                 context,
                 DividerItemDecoration.VERTICAL
@@ -42,9 +44,17 @@ class AllChatFragment : Fragment() {
 
         viewModel.uiState.observe(viewLifecycleOwner) {
             if (it == AllChatViewModel.AllChatState.Update) {
-                val allChatAdapter = AllChatAdapter(requireContext(), viewModel.model)
-                dataBinding.recyclerView.adapter = allChatAdapter
+                allChatAdapter = AllChatAdapter(this, viewModel.model)
+                recyclerView.adapter = allChatAdapter
             }
         }
+    }
+
+    override fun doClickItemChat(item: ChatModel?) {
+        val intent = Intent(context, ChatActivity::class.java)
+        val gson = Gson()
+        val json: String = gson.toJson(item)
+        intent.putExtra("json", json)
+        startActivity(intent)
     }
 }

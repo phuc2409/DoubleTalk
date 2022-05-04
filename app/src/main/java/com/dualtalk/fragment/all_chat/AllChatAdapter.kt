@@ -1,21 +1,19 @@
 package com.dualtalk.fragment.all_chat
 
-import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.dualtalk.R
-import com.dualtalk.activity.chat.ChatActivity
 import com.dualtalk.activity.chat.ChatModel
 import com.dualtalk.common.Constant
 import com.dualtalk.helper.DateTimeHelper
-import com.google.gson.Gson
+import kotlinx.android.synthetic.main.item_all_chat.view.*
 
-class AllChatAdapter(private val context: Context, private val list: ArrayList<ChatModel>) :
+class AllChatAdapter(
+    private val listener: IAllChatListener?,
+    private val list: ArrayList<ChatModel>
+) :
     RecyclerView.Adapter<AllChatAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -26,26 +24,10 @@ class AllChatAdapter(private val context: Context, private val list: ArrayList<C
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val model = list[position]
+        holder.bindData(item = model)
 
-        if (model.participantNames[0] == Constant.sendName && model.participantNames.size > 1) {
-            holder.textViewName.text = model.participantNames[1]
-        } else {
-            holder.textViewName.text = model.participantNames[0]
-        }
-
-        holder.textViewMessage.text = model.latestMessage
-
-        if (model.updatedAt != null) {
-            holder.textViewUpdatedAt.text =
-                "${DateTimeHelper.timestampToDateTimeString(model.updatedAt)}"
-        }
-
-        holder.linearLayout.setOnClickListener {
-            val intent = Intent(context, ChatActivity::class.java)
-            val gson = Gson()
-            val json: String = gson.toJson(model)
-            intent.putExtra("json", json)
-            context.startActivity(intent)
+        holder.itemView.setOnClickListener {
+            listener?.doClickItemChat(item = model)
         }
     }
 
@@ -54,10 +36,18 @@ class AllChatAdapter(private val context: Context, private val list: ArrayList<C
     }
 
     class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
-        //todo: dataBinding cho đoạn này
-        val linearLayout: LinearLayout = itemView.findViewById(R.id.linearLayout)
-        val textViewName: TextView = itemView.findViewById(R.id.textViewName)
-        val textViewMessage: TextView = itemView.findViewById(R.id.textViewMessage)
-        val textViewUpdatedAt: TextView = itemView.findViewById(R.id.textViewUpdatedAt)
+        fun bindData(item: ChatModel) {
+            if (item.participantNames[0] == Constant.sendName && item.participantNames.size > 1) {
+                itemView.tvName?.text = item.participantNames[1]
+            } else {
+                itemView.tvName?.text = item.participantNames[0]
+            }
+            itemView.tvMessage?.text = item.latestMessage
+            itemView.tvUpdatedAt?.text = DateTimeHelper.timestampToDateTimeString(item.updatedAt!!)
+        }
     }
+}
+
+interface IAllChatListener {
+    fun doClickItemChat(item: ChatModel?)
 }
