@@ -8,14 +8,15 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import com.dualtalk.R
-import com.dualtalk.activity.chat.ChatActivity
 import com.dualtalk.activity.forgotpassword.ForgotPasswordActivity
+import com.dualtalk.activity.main.MainActivity
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
-    val ref = FirebaseAuth.getInstance()
+    private val ref = FirebaseAuth.getInstance()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -42,52 +43,54 @@ class LoginActivity : AppCompatActivity() {
 
         btnsignup.setOnClickListener {
             if (password.text.toString().trim() != confirm.text.toString().trim()) {
-                Toast.makeText(applicationContext,"password and confirmpassword is not in valid",
-                    Toast.LENGTH_SHORT)
-            }
-            else
-            {
+                Toast.makeText(
+                    applicationContext, "password and confirmpassword is not in valid",
+                    Toast.LENGTH_SHORT
+                )
+            } else {
                 ref.createUserWithEmailAndPassword(
                     email.text.toString().trim(),
                     password.text.toString().trim()
                 )
-                var intent : Intent = Intent(this@LoginActivity,ChatActivity::class.java)
+                val intent = Intent(this@LoginActivity, MainActivity::class.java)
                 startActivity(intent)
 
             }
 
         }
         signinbtn.setOnClickListener {
-            val emailsignin  = findViewById<TextInputEditText>(R.id.email)
+            val emailsignin = findViewById<TextInputEditText>(R.id.email)
             val passwordsignin = findViewById<TextInputEditText>(R.id.pasword)
 
-            if(emailsignin.text.toString().trim().equals("") || passwordsignin.text.toString().trim().equals("")){
-                Toast.makeText(this@LoginActivity,"Email or Password is null",Toast.LENGTH_SHORT).show()
-            }
-            else{
-                FirebaseAuth.getInstance().signInWithEmailAndPassword(emailsignin.text.toString().trim(),passwordsignin.text.toString().trim()).addOnCompleteListener {
-                        task ->
-                    if(task.isSuccessful)
-                    {
-                        var intent : Intent = Intent(this@LoginActivity,ChatActivity::class.java)
+            if (emailsignin.text.toString().trim().equals("") || passwordsignin.text.toString()
+                    .trim().equals("")
+            ) {
+                Toast.makeText(this@LoginActivity, "Email or Password is null", Toast.LENGTH_SHORT)
+                    .show()
+            } else {
+                FirebaseAuth.getInstance().signInWithEmailAndPassword(
+                    emailsignin.text.toString().trim(),
+                    passwordsignin.text.toString().trim()
+                ).addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        val intent: Intent = Intent(this@LoginActivity, MainActivity::class.java)
                         startActivity(intent)
-                    }
-                    else
-                    {
-                        Toast.makeText(this@LoginActivity,"Email or Password is invalid",Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(
+                            this@LoginActivity,
+                            "Email or Password is invalid",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
             }
         }
 
-
         //FogotPassword activity
-        txtforgotpass.setOnClickListener{
+        txtforgotpass.setOnClickListener {
             //Toast.makeText(this@LoginActivity , "Vao giao dien quen mat khau" , Toast.LENGTH_SHORT).show()
-            var intent = Intent(this@LoginActivity , ForgotPasswordActivity::class.java)
+            val intent = Intent(this@LoginActivity, ForgotPasswordActivity::class.java)
             startActivity(intent)
         }
-
-
     }
 }
