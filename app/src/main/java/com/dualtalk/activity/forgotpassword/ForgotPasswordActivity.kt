@@ -31,6 +31,7 @@ class ForgotPasswordActivity : AppCompatActivity() {
         viewmodel.forgotpassState.observe(this){
             if(it == ForgotPasswordViewModel.forgotPassState.Success){
                 Toast.makeText(this, "Please check your email to reset password!", Toast.LENGTH_SHORT).show()
+                finish()
             }
             if(it == ForgotPasswordViewModel.forgotPassState.Fail){
                 Toast.makeText(this, "Fail", Toast.LENGTH_SHORT).show()

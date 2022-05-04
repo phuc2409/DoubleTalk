@@ -12,6 +12,9 @@ import com.dualtalk.activity.forgotpassword.ForgotPasswordActivity
 import com.dualtalk.activity.main.MainActivity
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
@@ -75,6 +78,7 @@ class LoginActivity : AppCompatActivity() {
                     if (task.isSuccessful) {
                         val intent: Intent = Intent(this@LoginActivity, MainActivity::class.java)
                         startActivity(intent)
+                        GetUserProfile()
                     } else {
                         Toast.makeText(
                             this@LoginActivity,
@@ -91,6 +95,19 @@ class LoginActivity : AppCompatActivity() {
             //Toast.makeText(this@LoginActivity , "Vao giao dien quen mat khau" , Toast.LENGTH_SHORT).show()
             val intent = Intent(this@LoginActivity, ForgotPasswordActivity::class.java)
             startActivity(intent)
+        }
+
+    }
+
+
+    fun GetUserProfile(){
+        val user = Firebase.auth.currentUser
+        user?.let {
+            val name = user.displayName
+            val email = user.email
+            val Id = user.uid
+
+            Toast.makeText(this@LoginActivity , name + " , " + email + " , " +Id , Toast.LENGTH_SHORT).show()
         }
     }
 }
