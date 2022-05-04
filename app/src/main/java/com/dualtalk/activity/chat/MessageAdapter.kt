@@ -38,8 +38,10 @@ class MessageAdapter(private val list: ArrayList<MessageModel>) :
 
             itemView.tvSendId.text = "Send: ${item.sendId}"
             itemView.tvMessage.text = item.message
-            itemView.tvCreatedAt.text =
-                "Created at: ${DateTimeHelper.timestampToDateTimeString(item.createdAt!!)}"
+            if (item.createdAt != null) {
+                itemView.tvCreatedAt.text =
+                    "Created at: ${DateTimeHelper.timestampToDateTimeString(item.createdAt)}"
+            }
         }
     }
 }

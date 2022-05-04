@@ -43,7 +43,9 @@ class AllChatAdapter(
                 itemView.tvName?.text = item.participantNames[0]
             }
             itemView.tvMessage?.text = item.latestMessage
-            itemView.tvUpdatedAt?.text = DateTimeHelper.timestampToDateTimeString(item.updatedAt!!)
+            if (item.updatedAt != null) {
+                itemView.tvUpdatedAt.text = DateTimeHelper.timestampToDateTimeString(item.updatedAt)
+            }
         }
     }
 }
