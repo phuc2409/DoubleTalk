@@ -36,12 +36,16 @@ class ChatActivity : AppCompatActivity() {
             textViewChatName.text = viewModel.chatModel.participantNames[0]
         }
 
-        buttonSend.setOnClickListener {
+        imgBtnBack.setOnClickListener {
+            finish()
+        }
+
+        imgBtnSend.isEnabled = false
+        imgBtnSend.setOnClickListener {
             viewModel.sendMessage(editTextMessage.text.toString())
         }
 
         editTextMessage.addTextChangedListener(object : TextWatcher {
-
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
             }
@@ -51,7 +55,7 @@ class ChatActivity : AppCompatActivity() {
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                buttonSend.isEnabled = p0.toString() != ""
+                imgBtnSend.isEnabled = p0.toString().isNotBlank()
             }
         })
 

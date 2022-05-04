@@ -10,17 +10,17 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:elevation="5dp"
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/textView2"
+        <ImageButton
+            android:id="@+id/imgBtnBack"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="Header" />
+            android:backgroundTint="@color/white"
+            app:srcCompat="@drawable/ic_back" />
 
         <TextView
             android:id="@+id/textViewChatName"
@@ -28,7 +28,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Header" />
+            android:text="Chat name" />
 
     </LinearLayout>
 
@@ -46,6 +46,7 @@
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:elevation="5dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -60,12 +61,13 @@
             android:inputType="textMultiLine"
             android:maxLines="6" />
 
-        <Button
-            android:id="@+id/buttonSend"
+        <ImageButton
+            android:id="@+id/imgBtnSend"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/white"
             android:enabled="false"
-            android:text="Send" />
+            app:srcCompat="@drawable/ic_send" />
 
     </LinearLayout>
 
