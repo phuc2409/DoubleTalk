@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.dualtalk.R
-import com.dualtalk.fragment.SettingFragment
+import com.dualtalk.fragment.setting.SettingFragment
 import com.dualtalk.fragment.TinnhanchoFragment
 import com.dualtalk.fragment.all_chat.AllChatFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
