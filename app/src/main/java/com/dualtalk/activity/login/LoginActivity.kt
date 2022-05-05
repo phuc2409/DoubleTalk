@@ -63,7 +63,8 @@ class LoginActivity : AppCompatActivity() {
                 //add user vào database sau khi đăng kí
                 val user = hashMapOf(
                     "email" to email.text.toString().trim(),
-                    "imgUrl" to ""
+                    "imgUrl" to "",
+                    "fullName" to ""
                 )
 
                 db.collection("users").document(email.text.toString().trim())
