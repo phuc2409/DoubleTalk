@@ -1,7 +1,7 @@
 package com.dualtalk.activity.login
 
 class UserModel(email: String, password: String, name: String) {
-   var email: String
+    var email: String
     get() = this.email
         set(value) {email = value}
     var password: String
