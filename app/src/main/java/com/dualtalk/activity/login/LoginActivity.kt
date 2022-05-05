@@ -3,6 +3,7 @@ package com.dualtalk.activity.login
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
@@ -12,13 +13,14 @@ import com.dualtalk.activity.forgotpassword.ForgotPasswordActivity
 import com.dualtalk.activity.main.MainActivity
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
     private val ref = FirebaseAuth.getInstance()
+    private val db = Firebase.firestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,13 +46,13 @@ class LoginActivity : AppCompatActivity() {
         val signinbtn = findViewById<Button>(R.id.signin)
         val txtforgotpass = findViewById<TextView>(R.id.txtviewForgotPassword)
 
-         btnsignup.setOnClickListener {
+        btnsignup.setOnClickListener {
             if (password.text.toString().trim() != confirm.text.toString().trim()) {
                 Toast.makeText(
                     //pass = cofirmpass
-                    applicationContext, "password and confirmpassword is not in valid",
+                    applicationContext, "password and confirm password is not in valid",
                     Toast.LENGTH_SHORT
-                )
+                ).show()
             } else {
                 //tạo 1 user mới với id và mật khẩu
                 ref.createUserWithEmailAndPassword(
@@ -61,15 +63,18 @@ class LoginActivity : AppCompatActivity() {
                 //add user vào database sau khi đăng kí
                 val user = hashMapOf(
                     "email" to email.text.toString().trim(),
-                    "password" to password.text.toString().trim(),
                     "imgUrl" to ""
                 )
 
-
                 db.collection("users").document(email.text.toString().trim())
                     .set(user)
-                    .addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully written!") }
-                    .addOnFailureListener { e -> Log.w(TAG, "Error writing document", e) }
+                    .addOnSuccessListener {
+                        Log.d(
+                            "Create user",
+                            "DocumentSnapshot successfully written!"
+                        )
+                    }
+                    .addOnFailureListener { e -> Log.w("Create user", "Error writing document", e) }
 
                 //chuyển intent
                 val intent = Intent(this@LoginActivity, MainActivity::class.java)
@@ -82,8 +87,8 @@ class LoginActivity : AppCompatActivity() {
             val emailsignin = findViewById<TextInputEditText>(R.id.email)
             val passwordsignin = findViewById<TextInputEditText>(R.id.pasword)
 
-            if (emailsignin.text.toString().trim().equals("") || passwordsignin.text.toString()
-                    .trim().equals("")
+            if (emailsignin.text.toString().trim() == "" || passwordsignin.text.toString()
+                    .trim() == ""
             ) {
                 Toast.makeText(this@LoginActivity, "Email or Password is null", Toast.LENGTH_SHORT)
                     .show()
@@ -93,7 +98,7 @@ class LoginActivity : AppCompatActivity() {
                     passwordsignin.text.toString().trim()
                 ).addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        val intent: Intent = Intent(this@LoginActivity, MainActivity::class.java)
+                        val intent = Intent(this@LoginActivity, MainActivity::class.java)
                         startActivity(intent)
                         GetUserProfile()
                     } else {
@@ -117,14 +122,14 @@ class LoginActivity : AppCompatActivity() {
     }
 
 
-    fun GetUserProfile(){
+    fun GetUserProfile() {
         val user = Firebase.auth.currentUser
         user?.let {
             val name = user.displayName
             val email = user.email
             val Id = user.uid
 
-            Toast.makeText(this@LoginActivity , name + " , " + email + " , " +Id , Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "$name , $email , $Id", Toast.LENGTH_SHORT).show()
         }
     }
 }
