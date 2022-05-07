@@ -1,5 +1,6 @@
 package com.dualtalk.fragment.setting
 
+import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -15,9 +16,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.dualtalk.R
 import com.dualtalk.fragment.all_chat.AllChatViewModel
+import com.google.android.gms.tasks.Task
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FileDownloadTask
 import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.UploadTask
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -32,6 +36,11 @@ class SettingFragment : Fragment() {
 
     private lateinit var btnChooseImageAvartar:Button
     private lateinit var UserAvartar : ShapeableImageView
+
+    val useravartar = registerForActivityResult(ActivityResultContracts.GetContent()) {
+        UserAvartar.setImageURI(it)
+        viewModel.UpLoadAvartarToClound(it)
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,12 +63,11 @@ class SettingFragment : Fragment() {
         //xử lý hiển thị ảnh
         UserAvartar = mview.findViewById(R.id.avartar)
         btnChooseImageAvartar = mview.findViewById(R.id.chonanhdaidien)
-        val Useravartar = registerForActivityResult(ActivityResultContracts.GetContent() , ActivityResultCallback {
-            UserAvartar.setImageURI(it)
-            viewModel.UpLoadAvartarToClound(it)
-        })
+
+
+
         btnChooseImageAvartar.setOnClickListener {
-            Useravartar.launch("image/*")
+            useravartar.launch("image/*")
         }
 
 
@@ -71,7 +79,7 @@ class SettingFragment : Fragment() {
 
         viewModel.uiState.observe(viewLifecycleOwner){
             if(it == SettingFragmentViewModel.ChooseImageAvatar.Success){
-                Toast.makeText(mview.context , "Up anh thanh cong" , Toast.LENGTH_SHORT).show()
+                Toast.makeText(mview.context , "Up anh thanh cong va link anh la" , Toast.LENGTH_SHORT).show()
             }
             else{
                 Toast.makeText(mview.context , "Up anh ko thanh cong" , Toast.LENGTH_SHORT).show()
