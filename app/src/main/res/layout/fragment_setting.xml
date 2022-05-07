@@ -9,8 +9,8 @@
 
    <com.google.android.material.imageview.ShapeableImageView
        android:id="@+id/avartar"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
+       android:layout_width="80sp"
+       android:layout_height="80sp"
        app:shapeAppearanceOverlay="@style/circleImage"
        app:strokeWidth="1dp"
        app:strokeColor="@color/white"
@@ -25,4 +25,10 @@
        android:textColor="@color/black"
        android:drawableLeft="@drawable/icons8_camera_50"
        android:background="#00FFFFFF"/>
+   <EditText
+       android:id="@+id/demo123"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:textSize="20sp"
+       />
 </LinearLayout>

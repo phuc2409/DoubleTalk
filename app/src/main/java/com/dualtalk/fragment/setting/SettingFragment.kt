@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.contract.ActivityResultContracts
@@ -36,6 +37,7 @@ class SettingFragment : Fragment() {
 
     private lateinit var btnChooseImageAvartar:Button
     private lateinit var UserAvartar : ShapeableImageView
+    private lateinit var txtdemo : TextView
 
     val useravartar = registerForActivityResult(ActivityResultContracts.GetContent()) {
         UserAvartar.setImageURI(it)
@@ -70,6 +72,9 @@ class SettingFragment : Fragment() {
             useravartar.launch("image/*")
         }
 
+        //demo
+        txtdemo = mview.findViewById(R.id.demo123)
+
 
 
 
@@ -79,7 +84,8 @@ class SettingFragment : Fragment() {
 
         viewModel.uiState.observe(viewLifecycleOwner){
             if(it == SettingFragmentViewModel.ChooseImageAvatar.Success){
-                Toast.makeText(mview.context , "Up anh thanh cong va link anh la" , Toast.LENGTH_SHORT).show()
+                Toast.makeText(mview.context , "Up anh thanh cong va link anh la ${viewModel.urlUserAvartar} " , Toast.LENGTH_SHORT).show()
+                txtdemo.text = viewModel.urlUserAvartar
             }
             else{
                 Toast.makeText(mview.context , "Up anh ko thanh cong" , Toast.LENGTH_SHORT).show()
