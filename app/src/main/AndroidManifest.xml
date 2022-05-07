@@ -9,27 +9,42 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DualTalk">
+
+        <service
+            android:name=".service.NewMessageService"
+            android:enabled="true"
+            android:exported="false" />
+
         <activity
             android:name=".activity.forgotpassword.ForgotPasswordActivity"
             android:exported="false" />
+
         <activity
             android:name=".activity.chat.ChatActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
+
         <activity
             android:name=".activity.main.MainActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
+
         <activity
             android:name=".activity.signup.SignupActivity"
             android:exported="false" />
+
         <activity
             android:name=".activity.login.LoginActivity"
             android:exported="true">
+
             <intent-filter>
+
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+
             </intent-filter>
+
         </activity>
+
     </application>
 
 </manifest>
