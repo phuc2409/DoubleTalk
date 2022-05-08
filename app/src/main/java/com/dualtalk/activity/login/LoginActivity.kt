@@ -1,6 +1,8 @@
 package com.dualtalk.activity.login
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -21,7 +23,7 @@ import kotlinx.android.synthetic.main.activity_login.*
 class LoginActivity : AppCompatActivity() {
     private val ref = FirebaseAuth.getInstance()
     private val db = Firebase.firestore
-
+    lateinit var sharedPreferences: SharedPreferences
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -84,6 +86,15 @@ class LoginActivity : AppCompatActivity() {
             }
 
         }
+        sharedPreferences = getSharedPreferences("share", Context.MODE_PRIVATE)
+        var isremember = sharedPreferences.getBoolean("Check",false)
+        if(isremember)
+        {
+            var intent: Intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+
+        }
         signinbtn.setOnClickListener {
             val emailsignin = findViewById<TextInputEditText>(R.id.email)
             val passwordsignin = findViewById<TextInputEditText>(R.id.pasword)
@@ -99,9 +110,16 @@ class LoginActivity : AppCompatActivity() {
                     passwordsignin.text.toString().trim()
                 ).addOnCompleteListener { task ->
                     if (task.isSuccessful) {
+                        val username: String = emailsignin.text.toString()
+                        val pass : String = passwordsignin.text.toString()
+                        val editor: SharedPreferences.Editor = sharedPreferences.edit()
+                        editor.putString("User",username)
+                        editor.putString("Pass",pass)
+                        editor.commit()
                         val intent = Intent(this@LoginActivity, MainActivity::class.java)
                         startActivity(intent)
                         GetUserProfile()
+                        finish()
                     } else {
                         Toast.makeText(
                             this@LoginActivity,
