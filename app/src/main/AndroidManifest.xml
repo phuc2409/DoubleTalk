@@ -9,6 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DualTalk">
+        <activity
+            android:name=".activity.splashscreen.SplashActivity"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <service
             android:name=".service.NewMessageService"
@@ -18,33 +27,20 @@
         <activity
             android:name=".activity.forgotpassword.ForgotPasswordActivity"
             android:exported="false" />
-
         <activity
             android:name=".activity.chat.ChatActivity"
             android:exported="false" />
-
         <activity
             android:name=".activity.main.MainActivity"
             android:exported="false" />
-
         <activity
             android:name=".activity.signup.SignupActivity"
             android:exported="false" />
-
         <activity
             android:name=".activity.login.LoginActivity"
-            android:exported="true">
-
-            <intent-filter>
-
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-
-            </intent-filter>
+            android:exported="false">
 
         </activity>
-
     </application>
 
 </manifest>
