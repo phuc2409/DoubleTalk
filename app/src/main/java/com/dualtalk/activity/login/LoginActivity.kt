@@ -56,28 +56,30 @@ class LoginActivity : AppCompatActivity() {
                     Toast.LENGTH_SHORT
                 ).show()
             } else {
-                //tạo 1 user mới với id và mật khẩu
+                 //tạo 1 user mới với id và mật khẩu
                 ref.createUserWithEmailAndPassword(
                     email.text.toString().trim(),
                     password.text.toString().trim()
-                )
+                ).addOnSuccessListener(OnSuccessListener {
+//                    add user vào database sau khi đăng kí
+                    val user = hashMapOf(
+                        "email" to email.text.toString().trim(),
+                        "imgUrl" to "",
+                        "fullName" to "",
+                        "id" to ref.currentUser?.uid
 
-                //add user vào database sau khi đăng kí
-                val user = hashMapOf(
-                    "email" to email.text.toString().trim(),
-                    "imgUrl" to "",
-                    "fullName" to ""
-                )
+                    )
 
-                db.collection("users").document(email.text.toString().trim())
-                    .set(user)
-                    .addOnSuccessListener {
-                        Log.d(
-                            "Create user",
-                            "DocumentSnapshot successfully written!"
-                        )
-                    }
-                    .addOnFailureListener { e -> Log.w("Create user", "Error writing document", e) }
+                    db.collection("users").document(email.text.toString().trim())
+                        .set(user)
+                        .addOnSuccessListener {
+                            Log.d(
+                                "Create user",
+                                "DocumentSnapshot successfully written!"
+                            )
+                        }
+                        .addOnFailureListener { e -> Log.w("Create user", "Error writing document", e) }
+                })
 
                 //chuyển intent
                 val intent = Intent(this@LoginActivity, MainActivity::class.java)
