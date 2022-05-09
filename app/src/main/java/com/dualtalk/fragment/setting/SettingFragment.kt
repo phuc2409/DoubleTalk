@@ -2,6 +2,7 @@ package com.dualtalk.fragment.setting
 
 import android.app.Activity
 import android.content.Intent
+import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -16,6 +17,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.dualtalk.R
+import com.dualtalk.activity.login.LoginActivity
 import com.dualtalk.fragment.all_chat.AllChatViewModel
 import com.google.android.gms.tasks.Task
 import com.google.android.material.imageview.ShapeableImageView
@@ -23,6 +25,7 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FileDownloadTask
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.UploadTask
+import kotlinx.android.synthetic.main.fragment_setting.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -32,6 +35,7 @@ class SettingFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    lateinit var sharedPreferences: SharedPreferences
 
     private lateinit var viewModel: SettingFragmentViewModel
 
@@ -61,7 +65,14 @@ class SettingFragment : Fragment() {
 
         viewModel = ViewModelProvider(this).get(SettingFragmentViewModel::class.java)
         val mview =  inflater.inflate(R.layout.fragment_setting, container, false)
+        logout.setOnClickListener {
+            var editor: SharedPreferences.Editor = sharedPreferences.edit()
+            editor.clear()
+            editor.commit()
 
+            startActivity(Intent(requireContext(),LoginActivity::class.java))
+
+        }
         //xử lý hiển thị ảnh
         UserAvartar = mview.findViewById(R.id.avartar)
         btnChooseImageAvartar = mview.findViewById(R.id.chonanhdaidien)
