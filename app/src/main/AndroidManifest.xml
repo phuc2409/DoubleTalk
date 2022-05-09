@@ -10,8 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DualTalk">
         <activity
+            android:name=".activity.searchuser.SearchUser"
+            android:exported="false" />
+        <activity
             android:name=".activity.splashscreen.SplashActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -38,9 +41,7 @@
             android:exported="false" />
         <activity
             android:name=".activity.login.LoginActivity"
-            android:exported="false">
-
-        </activity>
+            android:exported="false"></activity>
     </application>
 
 </manifest>

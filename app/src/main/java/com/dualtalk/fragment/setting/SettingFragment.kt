@@ -65,7 +65,9 @@ class SettingFragment : Fragment() {
 
         viewModel = ViewModelProvider(this).get(SettingFragmentViewModel::class.java)
         val mview =  inflater.inflate(R.layout.fragment_setting, container, false)
-        logout.setOnClickListener {
+
+        val mlogout = mview.findViewById<Button>(R.id.logout)
+        mlogout.setOnClickListener {
             var editor: SharedPreferences.Editor = sharedPreferences.edit()
             editor.clear()
             editor.commit()

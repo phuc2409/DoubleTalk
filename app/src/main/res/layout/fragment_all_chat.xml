@@ -7,6 +7,19 @@
     android:orientation="vertical"
     tools:context=".fragment.all_chat.AllChatFragment">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+        <TextView
+            android:id="@+id/txtSearch"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:drawableLeft="@drawable/icons8_search_30"
+            android:hint="Tìm kiếm"
+            android:textSize="20sp"
+            android:gravity="center_vertical"/>
+    </RelativeLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"

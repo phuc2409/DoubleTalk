@@ -5,18 +5,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.dualtalk.R
 import com.dualtalk.activity.chat.ChatActivity
 import com.dualtalk.activity.chat.ChatModel
+import com.dualtalk.activity.searchuser.SearchUser
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_all_chat.*
 
 class AllChatFragment : Fragment(), IAllChatListener {
     private lateinit var viewModel: AllChatViewModel
     private var allChatAdapter: AllChatAdapter? = null
+    private lateinit var searchBar: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,6 +35,7 @@ class AllChatFragment : Fragment(), IAllChatListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupView()
+        clickSearchBar(view)
     }
 
     private fun setupView() {
@@ -56,5 +61,13 @@ class AllChatFragment : Fragment(), IAllChatListener {
         val json: String = gson.toJson(item)
         intent.putExtra("json", json)
         startActivity(intent)
+    }
+
+    private fun clickSearchBar(view: View){
+        searchBar = view.findViewById(R.id.txtSearch)
+        searchBar.setOnClickListener {
+            val intent = Intent(view.context ,SearchUser::class.java)
+            startActivity(intent)
+        }
     }
 }
