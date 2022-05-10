@@ -11,10 +11,15 @@ import com.bumptech.glide.Glide
 import com.dualtalk.R
 import de.hdodenhof.circleimageview.CircleImageView
 
-class SearchUserAdapter(context: Context,list: List<MUser>) : RecyclerView.Adapter<SearchUserAdapter.SearchUserViewHolder>() , Filterable {
+class SearchUserAdapter(
+    context: Context,
+    list: List<MUser>,
+    private val listener: ISearchUserListener
+) :
+    RecyclerView.Adapter<SearchUserAdapter.SearchUserViewHolder>(), Filterable {
     private var mlist: List<MUser>
     private var mlistold: List<MUser>
-    var mcontext : Context
+    var mcontext: Context
 
     init {
         mlist = list
@@ -22,11 +27,10 @@ class SearchUserAdapter(context: Context,list: List<MUser>) : RecyclerView.Adapt
         mcontext = context
     }
 
-
-    class SearchUserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-         var imgUser : CircleImageView
-         var txtViewNameUser : TextView
-         var layoutItem : RelativeLayout
+    class SearchUserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        var imgUser: CircleImageView
+        var txtViewNameUser: TextView
+        var layoutItem: RelativeLayout
 
         init {
             imgUser = itemView.findViewById(R.id.search_imgUser)
@@ -35,10 +39,8 @@ class SearchUserAdapter(context: Context,list: List<MUser>) : RecyclerView.Adapt
         }
     }
 
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchUserViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_user,parent,false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_user, parent, false)
         return SearchUserViewHolder(view)
     }
 
@@ -48,13 +50,9 @@ class SearchUserAdapter(context: Context,list: List<MUser>) : RecyclerView.Adapt
         //set ảnh đại diện cho các user
         Glide.with(holder.itemView).load(user.UrlImageUser).into(holder.imgUser)
         holder.txtViewNameUser.text = user.mUsername.trim()
-        holder.layoutItem.setOnClickListener {
-            onClickGotoDetail(user)
+        holder.itemView.setOnClickListener {
+            listener.onClickItem(user)
         }
-    }
-
-    private fun onClickGotoDetail(user:MUser){
-        Toast.makeText(this.mcontext,"Đang vào giao diện nói chuyện vs ${user.mUsername}" , Toast.LENGTH_SHORT).show()
     }
 
     override fun getItemCount(): Int {
@@ -62,16 +60,15 @@ class SearchUserAdapter(context: Context,list: List<MUser>) : RecyclerView.Adapt
     }
 
     override fun getFilter(): Filter {
-        val customFilter = object : Filter(){
+        val customFilter = object : Filter() {
             override fun performFiltering(p0: CharSequence?): FilterResults {
-                val searchKeyword : String = p0.toString()
-                if(searchKeyword.isEmpty()){
+                val searchKeyword: String = p0.toString()
+                if (searchKeyword.isEmpty()) {
                     mlist = mlistold
-                }
-                else{
-                     val listtg : ArrayList<MUser> = ArrayList()
-                    for(user : MUser in mlistold){
-                        if(user.mUsername.lowercase().contains(searchKeyword.lowercase())){
+                } else {
+                    val listtg: ArrayList<MUser> = ArrayList()
+                    for (user: MUser in mlistold) {
+                        if (user.mUsername.lowercase().contains(searchKeyword.lowercase())) {
                             listtg.add(user)
                         }
                     }
@@ -86,10 +83,11 @@ class SearchUserAdapter(context: Context,list: List<MUser>) : RecyclerView.Adapt
                 mlist = p1?.values as List<MUser>
                 notifyDataSetChanged()
             }
-
         }
         return customFilter
     }
+}
 
-
+interface ISearchUserListener {
+    fun onClickItem(item: MUser?)
 }

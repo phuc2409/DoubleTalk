@@ -5,6 +5,7 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
+import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
@@ -15,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.dualtalk.R
 import com.dualtalk.databinding.ActivitySearchUserBinding
 
-class SearchUserActivity : AppCompatActivity() {
+class SearchUserActivity : AppCompatActivity(), ISearchUserListener {
     private lateinit var databiding: ActivitySearchUserBinding
     private lateinit var viewModel: SearchUserViewModel
     private lateinit var rcvUser: RecyclerView
@@ -43,7 +44,7 @@ class SearchUserActivity : AppCompatActivity() {
 
         viewModel.uiState.observe(this) {
             if (it == SearchUserViewModel.SearchUserState.Success) {
-                searchUserAdapter = SearchUserAdapter(this, viewModel.mlist)
+                searchUserAdapter = SearchUserAdapter(this, viewModel.mlist, this)
                 rcvUser.adapter = searchUserAdapter
             }
         }
@@ -67,5 +68,15 @@ class SearchUserActivity : AppCompatActivity() {
             }
         })
         return true
+    }
+
+    override fun onClickItem(item: MUser?) {
+        item?.let {
+            Toast.makeText(
+                this,
+                "Đang vào giao diện nói chuyện vs ${item.mUsername}",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
     }
 }
