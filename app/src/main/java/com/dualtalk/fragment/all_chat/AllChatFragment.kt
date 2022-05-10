@@ -6,14 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.dualtalk.R
 import com.dualtalk.activity.chat.ChatActivity
 import com.dualtalk.activity.chat.ChatModel
-import com.dualtalk.activity.searchuser.SearchUser
+import com.dualtalk.activity.searchuser.SearchUserActivity
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_all_chat.*
 
@@ -66,7 +65,7 @@ class AllChatFragment : Fragment(), IAllChatListener {
     private fun clickSearchBar(view: View){
         searchBar = view.findViewById(R.id.txtSearch)
         searchBar.setOnClickListener {
-            val intent = Intent(view.context ,SearchUser::class.java)
+            val intent = Intent(view.context ,SearchUserActivity::class.java)
             startActivity(intent)
         }
     }

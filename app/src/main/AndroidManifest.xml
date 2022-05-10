@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DualTalk">
         <activity
-            android:name=".activity.searchuser.SearchUser"
+            android:name=".activity.searchuser.SearchUserActivity"
             android:exported="false" />
         <activity
             android:name=".activity.splashscreen.SplashActivity"
