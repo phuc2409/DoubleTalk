@@ -29,7 +29,6 @@ class SearchUserViewModel : ViewModel(), Observable {
                 val id = user.getString("id").toString().trim()
                 mlist.add(MUser(id ,email, name, url))
             }
-            mlist.add(MUser("1" , "dat@gmail.com" , "Đạt Nguyễn" , "https://firebasestorage.googleapis.com/v0/b/demo2021-ae092.appspot.com/o/Picture%2Fcontent%3A%2Fcom.android.providers.media.documents%2Fdocument%2Fimage%253A24?alt=media&token=3a149aa5-c97e-4858-a295-a5a9e59b3399"))
             uiState.postValue(SearchUserState.Success)
             Log.d("mlist", "Đã có size = ${mlist.size}")
         }
