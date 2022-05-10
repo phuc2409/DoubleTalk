@@ -57,7 +57,7 @@ class LoginActivity : AppCompatActivity() {
                     Toast.LENGTH_SHORT
                 ).show()
             } else {
-                 //tạo 1 user mới với id và mật khẩu
+                //tạo 1 user mới với id và mật khẩu
                 ref.createUserWithEmailAndPassword(
                     email.text.toString().trim(),
                     password.text.toString().trim()
@@ -66,12 +66,11 @@ class LoginActivity : AppCompatActivity() {
                     val user = hashMapOf(
                         "email" to email.text.toString().trim(),
                         "imgUrl" to "",
-                        "fullName" to "",
+                        "fullName" to email.text.toString().trim(),
                         "id" to ref.currentUser?.uid
-
                     )
 
-                    db.collection("users").document(email.text.toString().trim())
+                    db.collection("users").document(ref.currentUser?.uid.toString())
                         .set(user)
                         .addOnSuccessListener {
                             Log.d(
@@ -79,7 +78,13 @@ class LoginActivity : AppCompatActivity() {
                                 "DocumentSnapshot successfully written!"
                             )
                         }
-                        .addOnFailureListener { e -> Log.w("Create user", "Error writing document", e) }
+                        .addOnFailureListener { e ->
+                            Log.w(
+                                "Create user",
+                                "Error writing document",
+                                e
+                            )
+                        }
                 })
 
                 //chuyển intent
@@ -90,9 +95,8 @@ class LoginActivity : AppCompatActivity() {
 
         }
         sharedPreferences = getSharedPreferences("share", Context.MODE_PRIVATE)
-        var isremember = sharedPreferences.getBoolean("Check",false)
-        if(isremember)
-        {
+        var isremember = sharedPreferences.getBoolean("Check", false)
+        if (isremember) {
             var intent: Intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
@@ -114,10 +118,10 @@ class LoginActivity : AppCompatActivity() {
                 ).addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         val username: String = emailsignin.text.toString()
-                        val pass : String = passwordsignin.text.toString()
+                        val pass: String = passwordsignin.text.toString()
                         val editor: SharedPreferences.Editor = sharedPreferences.edit()
-                        editor.putString("User",username)
-                        editor.putString("Pass",pass)
+                        editor.putString("User", username)
+                        editor.putString("Pass", pass)
                         editor.commit()
                         val intent = Intent(this@LoginActivity, MainActivity::class.java)
                         startActivity(intent)

@@ -24,7 +24,6 @@ class NewMessageService : Service() {
             for (dc in snapshots!!.documentChanges) {
                 if (dc.type == DocumentChange.Type.MODIFIED) {
                     Log.d("Chat Service", "New: ${dc.document.data}")
-//                    createNotificationChannel(dc.document.id)
                     val builder = NotificationCompat.Builder(this, getString(R.string.channel_id))
                         .setSmallIcon(R.drawable.ic_send)
                         .setContentTitle(dc.document.data["participantNames"].toString())
