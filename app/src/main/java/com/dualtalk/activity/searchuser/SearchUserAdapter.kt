@@ -12,8 +12,8 @@ import com.dualtalk.R
 import de.hdodenhof.circleimageview.CircleImageView
 
 class SearchUserAdapter(context: Context,list: List<MUser>) : RecyclerView.Adapter<SearchUserAdapter.SearchUserViewHolder>() , Filterable {
-    private lateinit var mlist: List<MUser>
-    private lateinit var mlistold: List<MUser>
+    private var mlist: List<MUser>
+    private var mlistold: List<MUser>
     var mcontext : Context
 
     init {
@@ -59,7 +59,6 @@ class SearchUserAdapter(context: Context,list: List<MUser>) : RecyclerView.Adapt
 
     override fun getItemCount(): Int {
         return mlist.size
-        return 0
     }
 
     override fun getFilter(): Filter {
@@ -70,7 +69,7 @@ class SearchUserAdapter(context: Context,list: List<MUser>) : RecyclerView.Adapt
                     mlist = mlistold
                 }
                 else{
-                     val listtg : ArrayList<MUser> = ArrayList<MUser>()
+                     val listtg : ArrayList<MUser> = ArrayList()
                     for(user : MUser in mlistold){
                         if(user.mUsername.lowercase().contains(searchKeyword.lowercase())){
                             listtg.add(user)

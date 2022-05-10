@@ -34,7 +34,6 @@ class SearchUserActivity : AppCompatActivity() {
         rcvUser = findViewById(R.id.rcv_searchUser)
         rcvUser.layoutManager = linearLayoutManager
         searchUserAdapter = SearchUserAdapter(this,viewModel.getListUser())
-        rcvUser.adapter = searchUserAdapter
 
         //gạch dưới chân mỗi User
         val itemDecoration :RecyclerView.ItemDecoration = DividerItemDecoration(this , DividerItemDecoration.VERTICAL)
@@ -42,7 +41,11 @@ class SearchUserActivity : AppCompatActivity() {
         ////////////////////////
 
 
-
+        viewModel.uiState.observe(this){
+            if(it == SearchUserViewModel.search_user_state.Sucess){
+                rcvUser.adapter = searchUserAdapter
+            }
+        }
 
 
     }
