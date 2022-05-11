@@ -22,10 +22,10 @@ class MainViewModel : ViewModel(), Observable {
                 user.email?.let {
                     CurrentUser.email = it
                 }
-                user.username?.let {
+                user.fullName?.let {
                     CurrentUser.fullName = it
                 }
-                user.url?.let {
+                user.imgUrl?.let {
                     CurrentUser.imgUrl = it
                 }
                 uiState.postValue(MainState.Success)

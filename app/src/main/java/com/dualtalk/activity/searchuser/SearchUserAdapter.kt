@@ -48,8 +48,8 @@ class SearchUserAdapter(
         val user: MUser = mlist[position] ?: return
 
         //set ảnh đại diện cho các user
-        Glide.with(holder.itemView).load(user.url).into(holder.imgUser)
-        user.username?.let {
+        Glide.with(holder.itemView).load(user.imgUrl).into(holder.imgUser)
+        user.fullName?.let {
             holder.txtViewNameUser.text = it.trim()
         } ?: run {
             holder.txtViewNameUser.text = ""
@@ -72,7 +72,7 @@ class SearchUserAdapter(
                 } else {
                     val listtg: ArrayList<MUser> = ArrayList()
                     for (user: MUser in mlistold) {
-                        user.username?.let {
+                        user.fullName?.let {
                             if (it.lowercase().contains(searchKeyword.lowercase())) {
                                 listtg.add(user)
                             }
