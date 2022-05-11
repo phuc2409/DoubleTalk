@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.dualtalk.R
-import com.dualtalk.common.Constant
+import com.dualtalk.common.CurrentUser
 import com.dualtalk.helper.DateTimeHelper
 import kotlinx.android.synthetic.main.item_message.view.*
 import kotlin.collections.ArrayList
@@ -30,7 +30,7 @@ class MessageAdapter(private val list: ArrayList<MessageModel>) :
 
     class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
         fun bindData(item: MessageModel) {
-            if (item.sendId == Constant.sendId) {
+            if (item.sendId == CurrentUser.id) {
                 itemView.tvSendId.gravity = Gravity.END
                 itemView.tvMessage.gravity = Gravity.END
                 itemView.tvCreatedAt.gravity = Gravity.END

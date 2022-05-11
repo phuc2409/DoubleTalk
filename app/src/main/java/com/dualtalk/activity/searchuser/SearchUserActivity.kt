@@ -74,7 +74,7 @@ class SearchUserActivity : AppCompatActivity(), ISearchUserListener {
         item?.let {
             Toast.makeText(
                 this,
-                "Đang vào giao diện nói chuyện vs ${item.mUsername}",
+                "Đang vào giao diện nói chuyện vs ${item.username}",
                 Toast.LENGTH_SHORT
             ).show()
         }

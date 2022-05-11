@@ -2,7 +2,7 @@ package com.dualtalk.repository
 
 import android.util.Log
 import com.dualtalk.activity.chat.ChatModel
-import com.dualtalk.common.Constant
+import com.dualtalk.common.CurrentUser
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
@@ -14,7 +14,7 @@ class MessageRepo {
     fun sendMessage(chatModel: ChatModel, message: String) {
         val model = hashMapOf(
             "chatId" to chatModel.id,
-            "sendId" to Constant.sendId,
+            "sendId" to CurrentUser.id,
             "message" to message,
             "createdAt" to FieldValue.serverTimestamp()
         )
@@ -31,15 +31,15 @@ class MessageRepo {
     }
 
     fun createChat(receiveId: String, receiveName: String) {
-        val participantIds: ArrayList<String> = arrayListOf(Constant.sendId, receiveId)
+        val participantIds: ArrayList<String> = arrayListOf(CurrentUser.id, receiveId)
         participantIds.sort()
         val participantNames: ArrayList<String> = ArrayList()
-        if (participantIds[0] == Constant.sendId) {
-            participantNames.add(Constant.sendName)
+        if (participantIds[0] == CurrentUser.id) {
+            participantNames.add(CurrentUser.fullName)
             participantNames.add(receiveName)
         } else {
-            participantNames.add(Constant.sendName)
             participantNames.add(receiveName)
+            participantNames.add(CurrentUser.fullName)
         }
 
         val model = hashMapOf(

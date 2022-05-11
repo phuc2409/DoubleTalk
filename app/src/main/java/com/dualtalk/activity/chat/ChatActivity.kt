@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dualtalk.R
-import com.dualtalk.common.Constant
+import com.dualtalk.common.CurrentUser
 import com.google.firebase.FirebaseApp
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_chat.*
@@ -30,7 +30,7 @@ class ChatActivity : AppCompatActivity() {
         viewModel.chatModel = gson.fromJson(intent.getStringExtra("json"), ChatModel::class.java)
         viewModel.startListener()
 
-        if (viewModel.chatModel.participantNames[0] == Constant.sendName && viewModel.chatModel.participantNames.size > 1) {
+        if (viewModel.chatModel.participantNames[0] == CurrentUser.fullName && viewModel.chatModel.participantNames.size > 1) {
             textViewChatName.text = viewModel.chatModel.participantNames[1]
         } else {
             textViewChatName.text = viewModel.chatModel.participantNames[0]

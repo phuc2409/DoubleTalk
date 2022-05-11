@@ -7,22 +7,33 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.dualtalk.R
 import com.dualtalk.fragment.setting.SettingFragment
-import com.dualtalk.fragment.TinnhanchoFragment
 import com.dualtalk.fragment.all_chat.AllChatFragment
 import com.dualtalk.service.NewMessageService
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var viewModel: MainViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+
         createNotificationChannel()
 
+        viewModel.uiState.observe(this) {
+            if (it == MainViewModel.MainState.Success) {
+                setupView()
+            }
+        }
+    }
+
+    private fun setupView() {
         val chat = AllChatFragment()
-        val tinnhancho = TinnhanchoFragment()
         val setting = SettingFragment()
 
         makeCurrentFragment(chat)
@@ -30,11 +41,9 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this, NewMessageService::class.java)
         startService(intent)
 
-        val bottomnavigation = findViewById<BottomNavigationView>(R.id.bottomnavigation)
-        bottomnavigation.setOnNavigationItemSelectedListener {
+        bottomNavigation.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.doanchat -> makeCurrentFragment(chat)
-                R.id.tincho -> makeCurrentFragment(tinnhancho)
                 R.id.settings -> makeCurrentFragment(setting)
             }
             true

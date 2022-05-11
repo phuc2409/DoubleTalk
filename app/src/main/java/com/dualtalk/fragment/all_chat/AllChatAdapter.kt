@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.dualtalk.R
 import com.dualtalk.activity.chat.ChatModel
-import com.dualtalk.common.Constant
+import com.dualtalk.common.CurrentUser
 import com.dualtalk.helper.DateTimeHelper
 import kotlinx.android.synthetic.main.item_all_chat.view.*
 
@@ -37,7 +37,7 @@ class AllChatAdapter(
 
     class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
         fun bindData(item: ChatModel) {
-            if (item.participantNames[0] == Constant.sendName && item.participantNames.size > 1) {
+            if (item.participantNames[0] == CurrentUser.fullName && item.participantNames.size > 1) {
                 itemView.tvName?.text = item.participantNames[1]
             } else {
                 itemView.tvName?.text = item.participantNames[0]

@@ -1,12 +1,11 @@
 package com.dualtalk.common
 
-class Constant {
+class CurrentUser {
     companion object {
-        /**
-         * Id người gửi
-         */
-        const val sendId: String = "1"
-        const val sendName: String = "Phúc"
+        var id: String = ""
+        var email: String = ""
+        var fullName: String = ""
+        var imgUrl: String = ""
 
         /**
          * Id người nhận
