@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
+import android.preference.PreferenceManager
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -21,11 +22,14 @@ import com.dualtalk.activity.login.LoginActivity
 import com.dualtalk.fragment.all_chat.AllChatViewModel
 import com.google.android.gms.tasks.Task
 import com.google.android.material.imageview.ShapeableImageView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FileDownloadTask
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.UploadTask
 import kotlinx.android.synthetic.main.fragment_setting.*
+import java.util.prefs.Preferences
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -41,7 +45,6 @@ class SettingFragment : Fragment() {
 
     private lateinit var btnChooseImageAvartar:Button
     private lateinit var UserAvartar : ShapeableImageView
-    private lateinit var txtdemo : TextView
 
     val useravartar = registerForActivityResult(ActivityResultContracts.GetContent()) {
         UserAvartar.setImageURI(it)
@@ -68,11 +71,18 @@ class SettingFragment : Fragment() {
 
         val mlogout = mview.findViewById<Button>(R.id.logout)
         mlogout.setOnClickListener {
+            sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
             var editor: SharedPreferences.Editor = sharedPreferences.edit()
             editor.clear()
             editor.commit()
 
             startActivity(Intent(requireContext(),LoginActivity::class.java))
+            activity?.finish()
+
+            val auth = FirebaseAuth.getInstance()
+            if(auth.currentUser != null){
+                Toast.makeText(context , "Vẫn còn tk" , Toast.LENGTH_SHORT).show()
+            }
 
         }
         //xử lý hiển thị ảnh
@@ -85,8 +95,6 @@ class SettingFragment : Fragment() {
             useravartar.launch("image/*")
         }
 
-        //demo
-        txtdemo = mview.findViewById(R.id.demo123)
 
 
 
@@ -98,7 +106,6 @@ class SettingFragment : Fragment() {
         viewModel.uiState.observe(viewLifecycleOwner){
             if(it == SettingFragmentViewModel.ChooseImageAvatar.Success){
                 Toast.makeText(mview.context , "Up anh thanh cong va link anh la ${viewModel.urlUserAvartar} " , Toast.LENGTH_SHORT).show()
-                txtdemo.text = viewModel.urlUserAvartar
             }
             else{
                 Toast.makeText(mview.context , "Up anh ko thanh cong" , Toast.LENGTH_SHORT).show()

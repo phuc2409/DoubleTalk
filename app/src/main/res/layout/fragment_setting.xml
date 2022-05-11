@@ -5,18 +5,22 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.setting.SettingFragment"
+    android:background="@color/black"
     android:orientation="vertical">
 
    <LinearLayout
        android:layout_width="match_parent"
-       android:layout_height="match_parent"
+       android:layout_height="wrap_content"
       android:orientation="vertical">
       <com.google.android.material.imageview.ShapeableImageView
           android:id="@+id/avartar"
           android:layout_width="80sp"
           android:layout_height="80sp"
+          android:layout_gravity="center_horizontal"
           app:shapeAppearanceOverlay="@style/circleImage"
           app:strokeWidth="1dp"
+          android:layout_marginTop="25dp"
+          android:scaleType="centerCrop"
           app:strokeColor="@color/white"
           android:src="@drawable/ic_gg" />
 
@@ -24,23 +28,25 @@
           android:id="@+id/chonanhdaidien"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:text="Chọn ảnh đại diện"
+          android:text="choose avatar"
           android:textSize="12sp"
-          android:textColor="@color/black"
-          android:drawableLeft="@drawable/icons8_camera_50"
+          android:layout_gravity="center_horizontal"
+          android:textColor="#fff"
+          android:layout_marginTop="15dp"
+          android:drawableLeft="@drawable/icons8_camera_35"
           android:background="#00FFFFFF"/>
-      <EditText
-          android:id="@+id/demo123"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:textSize="20sp"
-          />
 
       <Button
           android:id="@+id/logout"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:text="Log Out" />
+          android:drawableLeft="@drawable/icons8_sign_out_35"
+          android:textAlignment="textStart"
+          android:text="Log Out"
+          android:textColor="#fff"
+          android:textSize="12dp"
+          android:backgroundTint="@color/black"
+          android:layout_marginTop="10dp"/>
 
    </LinearLayout>
 
