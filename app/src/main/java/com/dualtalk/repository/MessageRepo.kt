@@ -30,32 +30,28 @@ class MessageRepo {
             }
     }
 
-    fun createChat(receiveId: String, receiveName: String) {
-        val participantIds: ArrayList<String> = arrayListOf(CurrentUser.id, receiveId)
-        participantIds.sort()
-        val participantNames: ArrayList<String> = ArrayList()
-        if (participantIds[0] == CurrentUser.id) {
-            participantNames.add(CurrentUser.fullName)
-            participantNames.add(receiveName)
-        } else {
-            participantNames.add(receiveName)
-            participantNames.add(CurrentUser.fullName)
-        }
-
+    fun createChat(
+        chatModel: ChatModel,
+        onSuccess: (newChatId: String) -> Unit,
+        onError: () -> Unit
+    ) {
         val model = hashMapOf(
-            "participantIds" to participantIds,
-            "participantNames" to participantNames,
+            "participantIds" to chatModel.participantIds,
+            "participantNames" to chatModel.participantNames,
+            "sendId" to CurrentUser.id,
+            "sendName" to CurrentUser.fullName,
             "latestMessage" to "",
             "updatedAt" to FieldValue.serverTimestamp()
         )
 
-        database.collection("chats")
-            .add(model)
-            .addOnSuccessListener { documentReference ->
-                Log.d("Create chat", "DocumentSnapshot added with ID: ${documentReference.id}")
+        database.collection("chats").add(model)
+            .addOnSuccessListener {
+                Log.d("Add chat", "DocumentSnapshot added with ID: ${it.id}")
+                onSuccess(it.id)
             }
             .addOnFailureListener { e ->
-                Log.e("Create chat", "Error adding document", e)
+                Log.e("Add chat", "Error adding document", e)
+                onError()
             }
     }
 
@@ -63,6 +59,8 @@ class MessageRepo {
         val model = hashMapOf(
             "participantIds" to chatModel.participantIds,
             "participantNames" to chatModel.participantNames,
+            "sendId" to CurrentUser.id,
+            "sendName" to CurrentUser.fullName,
             "latestMessage" to message,
             "updatedAt" to FieldValue.serverTimestamp()
         )

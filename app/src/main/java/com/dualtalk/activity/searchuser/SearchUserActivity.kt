@@ -2,10 +2,10 @@ package com.dualtalk.activity.searchuser
 
 import android.app.SearchManager
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
-import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
@@ -14,7 +14,11 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dualtalk.R
+import com.dualtalk.activity.chat.ChatActivity
+import com.dualtalk.activity.chat.ChatModel
+import com.dualtalk.common.CurrentUser
 import com.dualtalk.databinding.ActivitySearchUserBinding
+import com.google.gson.Gson
 
 class SearchUserActivity : AppCompatActivity(), ISearchUserListener {
     private lateinit var databiding: ActivitySearchUserBinding
@@ -72,11 +76,32 @@ class SearchUserActivity : AppCompatActivity(), ISearchUserListener {
 
     override fun onClickItem(item: MUser?) {
         item?.let {
-            Toast.makeText(
-                this,
-                "Đang vào giao diện nói chuyện vs ${item.fullName}",
-                Toast.LENGTH_SHORT
-            ).show()
+            val participantIds = arrayListOf(CurrentUser.id, item.id)
+            participantIds.sort()
+            val participantNames = ArrayList<String>()
+            if (CurrentUser.id == participantIds[0]) {
+                participantNames.add(CurrentUser.fullName)
+                item.fullName?.let {
+                    participantNames.add(it)
+                } ?: run {
+                    participantNames.add("")
+                }
+            } else {
+                item.fullName?.let {
+                    participantNames.add(it)
+                } ?: run {
+                    participantNames.add("")
+                }
+                participantNames.add(CurrentUser.fullName)
+            }
+            val chatModel =
+                ChatModel(id = "", participantIds, participantNames, CurrentUser.id, "", null)
+
+            val intent = Intent(this, ChatActivity::class.java)
+            val gson = Gson()
+            val json: String = gson.toJson(chatModel)
+            intent.putExtra("json", json)
+            startActivity(intent)
         }
     }
 }

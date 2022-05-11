@@ -31,16 +31,13 @@ class MessageAdapter(private val list: ArrayList<MessageModel>) :
     class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
         fun bindData(item: MessageModel) {
             if (item.sendId == CurrentUser.id) {
-                itemView.tvSendId.gravity = Gravity.END
                 itemView.tvMessage.gravity = Gravity.END
                 itemView.tvCreatedAt.gravity = Gravity.END
             }
 
-            itemView.tvSendId.text = "Send: ${item.sendId}"
             itemView.tvMessage.text = item.message
             if (item.createdAt != null) {
-                itemView.tvCreatedAt.text =
-                    "Created at: ${DateTimeHelper.timestampToDateTimeString(item.createdAt)}"
+                itemView.tvCreatedAt.text = DateTimeHelper.timestampToDateTimeString(item.createdAt)
             }
         }
     }
