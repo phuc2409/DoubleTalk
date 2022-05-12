@@ -34,6 +34,8 @@ class SearchUserViewModel : ViewModel(), Observable {
         }
     }
 
+
+
     override fun addOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {
 
     }

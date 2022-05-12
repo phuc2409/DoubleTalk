@@ -18,7 +18,9 @@ import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
 import com.dualtalk.R
+import com.dualtalk.activity.editinfouser.EditInfoUserActivity
 import com.dualtalk.activity.login.LoginActivity
 import com.dualtalk.fragment.all_chat.AllChatViewModel
 import com.google.android.gms.tasks.Task
@@ -43,14 +45,15 @@ class SettingFragment : Fragment() {
     lateinit var sharedPreferences: SharedPreferences
 
     private lateinit var viewModel: SettingFragmentViewModel
-
-    private lateinit var btnChooseImageAvartar:Button
+    private lateinit var txtusername : TextView
+    private lateinit var btnEditInfoUser:Button
     private lateinit var UserAvartar : ShapeableImageView
 
-    val useravartar = registerForActivityResult(ActivityResultContracts.GetContent()) {
-        UserAvartar.setImageURI(it)
-        viewModel.UpLoadAvartarToClound(it)
-    }
+//    val useravartar = registerForActivityResult(ActivityResultContracts.GetContent()) {
+//        UserAvartar.setImageURI(it)
+//        viewModel.UpLoadAvartarToClound(it)
+//    }
+//    useravartar.launch("image/*")
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -80,14 +83,14 @@ class SettingFragment : Fragment() {
             startActivity(Intent(requireContext(),LoginActivity::class.java))
             activity?.finish()
         }
-        //xử lý hiển thị ảnh
+        //xử lý hiển thị ảnh , thông tin người dùng
         UserAvartar = mview.findViewById(R.id.avartar)
-        btnChooseImageAvartar = mview.findViewById(R.id.chonanhdaidien)
-
-
-
-        btnChooseImageAvartar.setOnClickListener {
-            useravartar.launch("image/*")
+        btnEditInfoUser = mview.findViewById(R.id.chinhsuathongtin)
+        txtusername = mview.findViewById(R.id.txtUsername)
+        viewModel.getInfoUser()
+        btnEditInfoUser.setOnClickListener {
+            val intent = Intent(activity , EditInfoUserActivity::class.java)
+            startActivity(intent)
         }
 
 
@@ -102,6 +105,9 @@ class SettingFragment : Fragment() {
             if(it == SettingFragmentViewModel.ChooseImageAvatar.Success){
                 Toast.makeText(mview.context , "Up anh thanh cong va link anh la ${viewModel.urlUserAvartar} " , Toast.LENGTH_SHORT).show()
             }
+            else if(it == SettingFragmentViewModel.ChooseImageAvatar.getinfoSucess){
+                getInfo(mview, UserAvartar, txtusername)
+            }
             else{
                 Toast.makeText(mview.context , "Up anh ko thanh cong" , Toast.LENGTH_SHORT).show()
             }
@@ -111,4 +117,8 @@ class SettingFragment : Fragment() {
         return mview
     }
 
+    fun getInfo(view: View , UserAvartar : ShapeableImageView , txtusername : TextView){
+        Glide.with(view).load(viewModel.infouser.imgUrl).into(UserAvartar)
+        txtusername.text = viewModel.infouser.fullName
+    }
 }

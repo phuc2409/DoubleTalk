@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DualTalk">
         <activity
+            android:name=".activity.editinfouser.EditInfoUserActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.searchuser.SearchUserActivity"
             android:exported="false" />
         <activity
@@ -41,7 +44,7 @@
             android:exported="false" />
         <activity
             android:name=".activity.login.LoginActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
     </application>
 
 </manifest>

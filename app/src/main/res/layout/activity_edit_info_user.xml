@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#1D2D50"
+        tools:context=".activity.editinfouser.EditInfoUserActivity">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Edit Your Infomation"
+            android:textColor="#fff"
+            android:textSize="20sp"
+            android:layout_above="@+id/EditInfo_linear"
+            android:layout_marginBottom="30sp"
+            android:gravity="center"/>
+        <LinearLayout
+            android:id="@+id/EditInfo_linear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_centerInParent="true">
+
+            <EditText
+                android:id="@+id/edt_EditInfo_fullname"
+                android:layout_width="240sp"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:background="#1E5F74"
+                android:textColor="#fff"
+                android:textSize="14sp"
+                android:hint="Your name"
+                android:maxLines="1"
+                android:drawableLeft="@drawable/icons8_user_35"
+                android:layout_gravity="center_horizontal"
+                android:textColorHint="#90FFFFFF"/>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/edt_EditInfo_img"
+                android:layout_width="100sp"
+                android:layout_height="100sp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="15sp"
+                android:src="@drawable/ic_gg"
+                app:civ_border_width="2dp"
+                app:civ_border_color="#fff"/>
+
+            <Button
+                android:id="@+id/edt_EditInfo_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Submit"
+                android:layout_gravity="center"
+                android:textSize="14sp"
+                android:layout_marginTop="8sp"
+                android:backgroundTint="#00A8CC"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+</layout>
