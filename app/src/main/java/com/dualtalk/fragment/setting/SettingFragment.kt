@@ -1,6 +1,7 @@
 package com.dualtalk.fragment.setting
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.net.Uri
@@ -71,19 +72,13 @@ class SettingFragment : Fragment() {
 
         val mlogout = mview.findViewById<Button>(R.id.logout)
         mlogout.setOnClickListener {
-            sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+            sharedPreferences = activity?.getSharedPreferences("share" , Context.MODE_PRIVATE) ?: sharedPreferences
             var editor: SharedPreferences.Editor = sharedPreferences.edit()
             editor.clear()
             editor.commit()
 
             startActivity(Intent(requireContext(),LoginActivity::class.java))
             activity?.finish()
-
-            val auth = FirebaseAuth.getInstance()
-            if(auth.currentUser != null){
-                Toast.makeText(context , "Vẫn còn tk" , Toast.LENGTH_SHORT).show()
-            }
-
         }
         //xử lý hiển thị ảnh
         UserAvartar = mview.findViewById(R.id.avartar)
