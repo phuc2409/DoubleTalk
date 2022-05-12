@@ -68,9 +68,14 @@ class ChatActivity : AppCompatActivity() {
         )
 
         viewModel.uiState.observe(this) {
-            if (it == ChatViewModel.ChatState.Success) {
+            if (it == ChatViewModel.ChatState.SendSuccess) {
                 editTextMessage.text.clear()
 
+                val messageAdapter = MessageAdapter(viewModel.model)
+                recyclerView.adapter = messageAdapter
+                recyclerView.scrollToPosition(viewModel.model.size - 1)
+            }
+            else if (it == ChatViewModel.ChatState.ReceiveSuccess) {
                 val messageAdapter = MessageAdapter(viewModel.model)
                 recyclerView.adapter = messageAdapter
                 recyclerView.scrollToPosition(viewModel.model.size - 1)
