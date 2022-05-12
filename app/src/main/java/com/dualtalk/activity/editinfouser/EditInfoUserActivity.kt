@@ -20,6 +20,7 @@ class EditInfoUserActivity : AppCompatActivity() {
 
         dataBiding.edtEditInfoBtn.setOnClickListener {
             viewModel.UpdateInfoUser(dataBiding.edtEditInfoFullname.text.toString())
+            finish()
         }
 
         viewModel.updateInfoState.observe(this){
