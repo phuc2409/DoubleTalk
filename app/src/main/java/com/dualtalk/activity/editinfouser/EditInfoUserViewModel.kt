@@ -24,15 +24,17 @@ class EditInfoUserViewModel : ViewModel() , Observable {
 
 
     fun UpdateInfoUser(name : String){
-        val sfDocRef = db.collection("users").document(CurrentUser.id)
-        db.runTransaction {transaction->
-            val snapshot = transaction.get(sfDocRef)
-            transaction.update(sfDocRef , "fullName" , name)
+        if(!name.isNullOrBlank()){
+            val sfDocRef = db.collection("users").document(CurrentUser.id)
+            db.runTransaction {transaction->
+                val snapshot = transaction.get(sfDocRef)
+                transaction.update(sfDocRef , "fullName" , name)
 
-        }.addOnSuccessListener {
-            updateInfoState.postValue(UpdateInfoState.Success)
-        }.addOnFailureListener {
-            updateInfoState.postValue(UpdateInfoState.Fail)
+            }.addOnSuccessListener {
+                updateInfoState.postValue(UpdateInfoState.Success)
+            }.addOnFailureListener {
+                updateInfoState.postValue(UpdateInfoState.Fail)
+            }
         }
     }
 
