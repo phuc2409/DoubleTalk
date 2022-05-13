@@ -60,12 +60,6 @@ class ChatActivity : AppCompatActivity() {
         })
 
         recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.addItemDecoration(
-            DividerItemDecoration(
-                this,
-                DividerItemDecoration.VERTICAL
-            )
-        )
 
         viewModel.uiState.observe(this) {
             if (it == ChatViewModel.ChatState.SendSuccess) {

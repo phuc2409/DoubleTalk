@@ -4,31 +4,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_gradient"
     tools:context=".activity.chat.ChatActivity">
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:elevation="5dp"
         android:orientation="horizontal"
+        android:padding="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageButton
+        <Button
             android:id="@+id/imgBtnBack"
+            style="@style/BtnStyle"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:backgroundTint="@color/white"
-            app:srcCompat="@drawable/ic_back" />
+            android:layout_marginEnd="8dp"
+            android:text="Back" />
 
         <TextView
             android:id="@+id/textViewChatName"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@drawable/border"
+            android:backgroundTint="@color/white"
+            android:ellipsize="end"
             android:gravity="center"
-            android:text="Chat name" />
+            android:maxLines="1"
+            android:text="Chat name"
+            android:textColor="@color/purple"
+            android:textSize="20sp" />
 
     </LinearLayout>
 
@@ -36,6 +45,7 @@
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
         android:scrollbars="vertical"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
         app:layout_constraintStart_toStartOf="parent"
@@ -46,8 +56,11 @@
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="@drawable/border"
         android:elevation="5dp"
         android:orientation="horizontal"
+        android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
@@ -55,19 +68,25 @@
             android:id="@+id/editTextMessage"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_weight="1"
+            android:background="@android:color/transparent"
             android:ems="10"
-            android:hint="Message"
+            android:hint="Aa"
             android:inputType="textMultiLine"
-            android:maxLines="6" />
+            android:maxLines="6"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:textSize="18sp" />
 
         <ImageButton
             android:id="@+id/imgBtnSend"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:backgroundTint="@color/white"
+            android:backgroundTint="@android:color/transparent"
             android:enabled="false"
-            app:srcCompat="@drawable/ic_send" />
+            app:srcCompat="@drawable/ic_send"
+            app:tint="@color/white" />
 
     </LinearLayout>
 
