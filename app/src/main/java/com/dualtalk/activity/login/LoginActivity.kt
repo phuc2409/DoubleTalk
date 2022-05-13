@@ -88,7 +88,10 @@ class LoginActivity : AppCompatActivity() {
                 })
 
                 //chuyển intent
-               Toast.makeText(this@LoginActivity,"Quay lại Login để đăng nhập vào app",Toast.LENGTH_SHORT).show()
+                signIn.background = resources.getDrawable(R.drawable.switch_trcks, null)
+                signUp.background = null
+                loginlayout.visibility = View.VISIBLE
+                signuplayout.visibility = View.GONE
 
             }
 
