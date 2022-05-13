@@ -50,7 +50,7 @@
         app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        tools:listitem="@layout/item_message" />
+        tools:listitem="@layout/item_message_send" />
 
     <LinearLayout
         android:id="@+id/linearLayout2"
@@ -76,7 +76,7 @@
             android:inputType="textMultiLine"
             android:maxLines="6"
             android:textColor="@color/white"
-            android:textColorHint="@color/white"
+            android:textColorHint="@color/silver"
             android:textSize="18sp" />
 
         <ImageButton
