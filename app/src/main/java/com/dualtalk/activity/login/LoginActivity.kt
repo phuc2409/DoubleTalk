@@ -88,8 +88,7 @@ class LoginActivity : AppCompatActivity() {
                 })
 
                 //chuyển intent
-                val intent = Intent(this@LoginActivity, MainActivity::class.java)
-                startActivity(intent)
+               Toast.makeText(this@LoginActivity,"Quay lại Login để đăng nhập vào app",Toast.LENGTH_SHORT).show()
 
             }
 
