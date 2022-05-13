@@ -20,6 +20,7 @@ class EditInfoUserViewModel : ViewModel() , Observable {
     val updateInfoState = MutableLiveData<UpdateInfoState>()
     val db = Firebase.firestore
     lateinit var urlUserAvartar : String
+    lateinit var name : String
 
 
 
@@ -32,10 +33,12 @@ class EditInfoUserViewModel : ViewModel() , Observable {
 
             }.addOnSuccessListener {
                 updateInfoState.postValue(UpdateInfoState.Success)
+                this.name = name
             }.addOnFailureListener {
                 updateInfoState.postValue(UpdateInfoState.Fail)
             }
         }
+        //CurrentUser.fullName = name
     }
 
     fun UpLoadAvartarToClound(uri :Uri){
@@ -56,12 +59,12 @@ class EditInfoUserViewModel : ViewModel() , Observable {
         db.runTransaction {transaction->
             val snapshot = transaction.get(sfDocRef)
             transaction.update(sfDocRef , "imgUrl" , this.urlUserAvartar)
-
         }.addOnSuccessListener {
             updateInfoState.postValue(UpdateInfoState.UpLoadImageSucess)
         }.addOnFailureListener {
             updateInfoState.postValue(UpdateInfoState.UpLoadImageFail)
         }
+        //CurrentUser.imgUrl = this.urlUserAvartar
     }
 
 

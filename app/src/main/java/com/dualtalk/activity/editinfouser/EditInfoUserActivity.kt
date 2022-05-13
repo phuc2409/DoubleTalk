@@ -7,6 +7,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.dualtalk.R
+import com.dualtalk.common.CurrentUser
 import com.dualtalk.databinding.ActivityEditInfoUserBinding
 
 class EditInfoUserActivity : AppCompatActivity() {
@@ -35,9 +36,11 @@ class EditInfoUserActivity : AppCompatActivity() {
         viewModel.updateInfoState.observe(this){
             if(it == EditInfoUserViewModel.UpdateInfoState.Success){
                 Toast.makeText(this ,"Update success!!" , Toast.LENGTH_SHORT).show()
+                CurrentUser.fullName = viewModel.name
             }
             if(it == EditInfoUserViewModel.UpdateInfoState.UpLoadImageSucess){
                 Toast.makeText(this ,"Your avartar link is : ${viewModel.urlUserAvartar}" , Toast.LENGTH_SHORT).show()
+                CurrentUser.imgUrl = viewModel.urlUserAvartar
             }
             if(it == EditInfoUserViewModel.UpdateInfoState.Fail){
                 Toast.makeText(this ,"Update fail!!" , Toast.LENGTH_SHORT).show()
