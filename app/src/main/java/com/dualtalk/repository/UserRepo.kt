@@ -2,6 +2,7 @@ package com.dualtalk.repository
 
 import android.util.Log
 import com.dualtalk.activity.searchuser.MUser
+import com.dualtalk.common.CurrentUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
@@ -34,5 +35,24 @@ class UserRepo {
             Log.d("Get current user", "Get failed with currentUser = null")
             onError()
         }
+    }
+
+    fun updateImg(imgUrl: String, onSuccess: () -> Unit, onError: () -> Unit) {
+        val model = hashMapOf(
+            "email" to CurrentUser.email,
+            "fullName" to CurrentUser.fullName,
+            "id" to CurrentUser.id,
+            "imgUrl" to imgUrl
+        )
+
+        database.collection("users").document(CurrentUser.id).update(model as Map<String, Any>)
+            .addOnSuccessListener {
+                Log.d("Update user", "DocumentSnapshot updated with imgUrl: $imgUrl")
+                onSuccess()
+            }
+            .addOnFailureListener { e ->
+                Log.e("Update user", "Error updating document", e)
+                onError()
+            }
     }
 }
