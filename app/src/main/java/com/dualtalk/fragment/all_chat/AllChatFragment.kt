@@ -39,12 +39,6 @@ class AllChatFragment : Fragment(), IAllChatListener {
 
     private fun setupView() {
         allChatAdapter = AllChatAdapter(this, viewModel.model)
-        recyclerView.addItemDecoration(
-            DividerItemDecoration(
-                context,
-                DividerItemDecoration.VERTICAL
-            )
-        )
 
         viewModel.uiState.observe(viewLifecycleOwner) {
             if (it == AllChatViewModel.AllChatState.Update) {
