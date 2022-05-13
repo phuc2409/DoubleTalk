@@ -7,8 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.lifecycle.ViewModelProvider
 import com.dualtalk.R
 import com.dualtalk.activity.chat.ChatActivity
 import com.dualtalk.activity.chat.ChatModel
@@ -27,7 +26,7 @@ class AllChatFragment : Fragment(), IAllChatListener {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        viewModel = ViewModelProviders.of(this)[AllChatViewModel::class.java]
+        viewModel = ViewModelProvider(this)[AllChatViewModel::class.java]
         return inflater.inflate(R.layout.fragment_all_chat, container, false)
     }
 
@@ -56,10 +55,10 @@ class AllChatFragment : Fragment(), IAllChatListener {
         startActivity(intent)
     }
 
-    private fun clickSearchBar(view: View){
+    private fun clickSearchBar(view: View) {
         searchBar = view.findViewById(R.id.txtSearch)
         searchBar.setOnClickListener {
-            val intent = Intent(view.context ,SearchUserActivity::class.java)
+            val intent = Intent(view.context, SearchUserActivity::class.java)
             startActivity(intent)
         }
     }
