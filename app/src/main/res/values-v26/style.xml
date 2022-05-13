@@ -21,7 +21,7 @@
     <style name="LinearLayoutSend">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginVertical">4dp</item>
+        <item name="android:layout_marginBottom">8dp</item>
         <item name="android:layout_marginStart">80dp</item>
         <item name="android:layout_marginEnd">8dp</item>
         <item name="android:background">@drawable/border</item>
@@ -33,7 +33,7 @@
     <style name="LinearLayoutReceive">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginVertical">4dp</item>
+        <item name="android:layout_marginBottom">8dp</item>
         <item name="android:layout_marginStart">8dp</item>
         <item name="android:layout_marginEnd">80dp</item>
         <item name="android:background">@drawable/border</item>
