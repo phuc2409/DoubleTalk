@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.dualtalk.R
 import com.dualtalk.activity.chat.ChatModel
 import com.dualtalk.common.CurrentUser
@@ -37,11 +38,12 @@ class AllChatAdapter(
 
     class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
         fun bindData(item: ChatModel) {
+            var position = 0
             if (item.participantIds[0] == CurrentUser.id && item.participantNames.size > 1) {
-                itemView.tvName?.text = item.participantNames[1]
-            } else {
-                itemView.tvName?.text = item.participantNames[0]
+                position = 1
             }
+            Glide.with(itemView).load(item.participantImgUrls[position]).into(itemView.circleImgView)
+            itemView.tvName?.text = item.participantNames[position]
             itemView.tvMessage?.text = item.latestMessage
             if (item.updatedAt != null) {
                 itemView.tvUpdatedAt.text = DateTimeHelper.timestampToDateTimeString(item.updatedAt)
