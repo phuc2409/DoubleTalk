@@ -1,5 +1,6 @@
 package com.dualtalk.activity.editinfouser
 
+import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -34,15 +35,15 @@ class EditInfoUserActivity : AppCompatActivity() {
         loadingDialog = LoadingDialog(this@EditInfoUserActivity)
 
         dataBiding.edtEditInfoBtn.setOnClickListener {
-            if(dataBiding.edtEditInfoFullname.text.toString().isNullOrBlank() && this.mUri == Uri.EMPTY){
-                finish()
+            if(dataBiding.edtEditInfoFullname.text.toString().isNullOrBlank() || this.mUri == Uri.EMPTY){
+                Toast.makeText(this , "Please enter your name and choose a new avatar!!" , Toast.LENGTH_SHORT).show()
             }
-            viewModel.UpdateInfoUser(dataBiding.edtEditInfoFullname.text.toString())
-
-            if(this.mUri  != null){
+            else{
+                viewModel.UpdateInfoUser(dataBiding.edtEditInfoFullname.text.toString())
                 viewModel.UpLoadAvartarToClound(this.mUri)
+                loadingDialog.startLoadingDialog()
             }
-            loadingDialog.startLoadingDialog()
+
         }
 
         dataBiding.edtEditInfoImg.setOnClickListener {
@@ -53,8 +54,6 @@ class EditInfoUserActivity : AppCompatActivity() {
             if (it == EditInfoUserViewModel.UpdateInfoState.Success) {
                 Toast.makeText(this, "Update success!!", Toast.LENGTH_SHORT).show()
                 CurrentUser.fullName = viewModel.name
-                loadingDialog.dismissDialog()
-                finish()
             }
             if (it == EditInfoUserViewModel.UpdateInfoState.UpLoadImageSucess) {
                 Toast.makeText(this, "Upload image success", Toast.LENGTH_SHORT).show()
