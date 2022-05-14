@@ -15,7 +15,7 @@ import com.google.firebase.ktx.Firebase
 class NewMessageService : Service() {
     private val db = Firebase.firestore
 
-    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+    private val listenerRegistration =
         db.collection("chats").whereArrayContains("participantIds", CurrentUser.id)
             .addSnapshotListener { snapshots, e ->
                 if (e != null) {
@@ -35,16 +35,21 @@ class NewMessageService : Service() {
 
                         NotificationManagerCompat.from(this)
                             .notify(dc.document.id.hashCode(), builder.build())
-//                        DocumentChange.Type.MODIFIED -> Log.d("Chat Service", "Modified: ${dc.document.data}")
-//                        DocumentChange.Type.REMOVED -> Log.d("Chat Service", "Removed: ${dc.document.data}")
                     }
                 }
             }
+
+    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         return START_STICKY
     }
 
     override fun onBind(p0: Intent?): IBinder? {
         return null
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        listenerRegistration.remove()
     }
 
     override fun onTaskRemoved(rootIntent: Intent?) {

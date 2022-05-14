@@ -61,9 +61,9 @@ class ChatViewModel : ViewModel(), Observable {
                             i.getString("message"),
                             i.getTimestamp("createdAt")
                         )
-                        Log.d("Message", message.toString())
                         messages.add(message)
                     }
+                    Log.d("All Messages", messages.toString())
                     model = messages
                     if (model.isNotEmpty()) {
                         if (model[model.size - 1].sendId == CurrentUser.id) {

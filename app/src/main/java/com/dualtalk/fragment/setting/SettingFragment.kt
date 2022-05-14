@@ -1,14 +1,9 @@
 package com.dualtalk.fragment.setting
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.content.pm.PackageManager
-import android.net.Uri
 import android.os.Bundle
-import android.preference.PreferenceManager
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,58 +11,27 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.result.ActivityResultCallback
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.dualtalk.R
 import com.dualtalk.activity.editinfouser.EditInfoUserActivity
 import com.dualtalk.activity.login.LoginActivity
-import com.dualtalk.fragment.all_chat.AllChatViewModel
-import com.google.android.gms.tasks.Task
+import com.dualtalk.service.NewMessageService
 import com.google.android.material.imageview.ShapeableImageView
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.FileDownloadTask
-import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.UploadTask
-import kotlinx.android.synthetic.main.fragment_setting.*
-import java.security.Permission
-import java.util.prefs.Preferences
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 class SettingFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-    lateinit var sharedPreferences: SharedPreferences
+    private lateinit var sharedPreferences: SharedPreferences
 
     private lateinit var viewModel: SettingFragmentViewModel
-    private lateinit var txtusername : TextView
-    private lateinit var btnEditInfoUser:Button
-    private lateinit var UserAvartar : ShapeableImageView
+    private lateinit var txtusername: TextView
+    private lateinit var btnEditInfoUser: Button
+    private lateinit var UserAvartar: ShapeableImageView
 
 //    val useravartar = registerForActivityResult(ActivityResultContracts.GetContent()) {
 //        UserAvartar.setImageURI(it)
 //        viewModel.UpLoadAvartarToClound(it)
 //    }
 //    useravartar.launch("image/*")
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -76,17 +40,11 @@ class SettingFragment : Fragment() {
         // Inflate the layout for this fragment
 
         viewModel = ViewModelProvider(this).get(SettingFragmentViewModel::class.java)
-        val mview =  inflater.inflate(R.layout.fragment_setting, container, false)
+        val mview = inflater.inflate(R.layout.fragment_setting, container, false)
 
         val mlogout = mview.findViewById<Button>(R.id.logout)
         mlogout.setOnClickListener {
-            sharedPreferences = activity?.getSharedPreferences("share" , Context.MODE_PRIVATE) ?: sharedPreferences
-            var editor: SharedPreferences.Editor = sharedPreferences.edit()
-            editor.clear()
-            editor.commit()
-
-            startActivity(Intent(requireContext(),LoginActivity::class.java))
-            activity?.finish()
+            logout()
         }
         //xử lý hiển thị ảnh , thông tin người dùng
         UserAvartar = mview.findViewById(R.id.avartar)
@@ -94,23 +52,25 @@ class SettingFragment : Fragment() {
         txtusername = mview.findViewById(R.id.txtUsername)
         viewModel.getInfoUser()
         btnEditInfoUser.setOnClickListener {
-            val intent = Intent(activity , EditInfoUserActivity::class.java)
+            val intent = Intent(activity, EditInfoUserActivity::class.java)
             startActivity(intent)
         }
 
-        viewModel.uiState.observe(viewLifecycleOwner){
-            if(it == SettingFragmentViewModel.ChooseImageAvatar.Success){
-                Toast.makeText(mview.context , "Up anh thanh cong va link anh la ${viewModel.urlUserAvartar} " , Toast.LENGTH_SHORT).show()
-            }
-            else if(it == SettingFragmentViewModel.ChooseImageAvatar.getinfoSucess){
+        viewModel.uiState.observe(viewLifecycleOwner) {
+            if (it == SettingFragmentViewModel.ChooseImageAvatar.Success) {
+                Toast.makeText(
+                    mview.context,
+                    "Up anh thanh cong va link anh la ${viewModel.urlUserAvartar} ",
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else if (it == SettingFragmentViewModel.ChooseImageAvatar.getinfoSucess) {
                 getInfo(mview, UserAvartar, txtusername)
-            }
-            else{
-                Toast.makeText(mview.context , "Up anh ko thanh cong" , Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(mview.context, "Up anh ko thanh cong", Toast.LENGTH_SHORT).show()
             }
         }
         UserAvartar.setOnClickListener {
-            Toast.makeText(requireContext(),"click",Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "click", Toast.LENGTH_SHORT).show()
 
         }
 
@@ -118,8 +78,23 @@ class SettingFragment : Fragment() {
         return mview
     }
 
-    fun getInfo(view: View , UserAvartar : ShapeableImageView , txtusername : TextView){
+    private fun getInfo(view: View, UserAvartar: ShapeableImageView, txtusername: TextView) {
         Glide.with(view).load(viewModel.infouser.imgUrl).into(UserAvartar)
         txtusername.text = viewModel.infouser.fullName
+    }
+
+    private fun logout() {
+        sharedPreferences =
+            activity?.getSharedPreferences("share", Context.MODE_PRIVATE) ?: sharedPreferences
+        val editor: SharedPreferences.Editor = sharedPreferences.edit()
+        editor.clear()
+        editor.apply()
+
+        //tắt service hiện thông báo khi đăng xuất
+        val intent = Intent(requireActivity(), NewMessageService::class.java)
+        requireActivity().stopService(intent)
+
+        startActivity(Intent(requireContext(), LoginActivity::class.java))
+        activity?.finish()
     }
 }

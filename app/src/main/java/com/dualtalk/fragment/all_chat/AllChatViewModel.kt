@@ -41,10 +41,9 @@ class AllChatViewModel : ViewModel(), Observable {
                         i.getString("latestMessage"),
                         i.getTimestamp("updatedAt")
                     )
-                    Log.d("Chat", chat.toString())
                     chats.add(chat)
                 }
-                Log.d("Chats", chats.toString())
+                Log.d("All Chats", chats.toString())
                 model = chats
                 uiState.postValue(AllChatState.Update)
             }
