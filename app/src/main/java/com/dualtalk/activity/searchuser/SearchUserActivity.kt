@@ -79,12 +79,19 @@ class SearchUserActivity : AppCompatActivity(), ISearchUserListener {
             val participantIds = arrayListOf(CurrentUser.id, item.id)
             participantIds.sort()
             val participantNames = ArrayList<String>()
+            val participantImgUrls = ArrayList<String>()
             if (CurrentUser.id == participantIds[0]) {
                 participantNames.add(CurrentUser.fullName)
+                participantImgUrls.add(CurrentUser.imgUrl)
                 item.fullName?.let {
                     participantNames.add(it)
                 } ?: run {
                     participantNames.add("")
+                }
+                item.imgUrl?.let {
+                    participantImgUrls.add(it)
+                } ?: run {
+                    participantImgUrls.add("")
                 }
             } else {
                 item.fullName?.let {
@@ -92,10 +99,24 @@ class SearchUserActivity : AppCompatActivity(), ISearchUserListener {
                 } ?: run {
                     participantNames.add("")
                 }
+                item.imgUrl?.let {
+                    participantImgUrls.add(it)
+                } ?: run {
+                    participantImgUrls.add("")
+                }
                 participantNames.add(CurrentUser.fullName)
+                participantImgUrls.add(CurrentUser.imgUrl)
             }
             val chatModel =
-                ChatModel(id = "", participantIds, participantNames, CurrentUser.id, "", null)
+                ChatModel(
+                    id = "",
+                    participantIds,
+                    participantNames,
+                    participantImgUrls,
+                    CurrentUser.id,
+                    "",
+                    null
+                )
 
             val intent = Intent(this, ChatActivity::class.java)
             val gson = Gson()

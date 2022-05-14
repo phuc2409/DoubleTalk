@@ -37,6 +37,14 @@ class ChatViewModel : ViewModel(), Observable {
 
                 })
         } else {
+            //Cập nhật lại vì có thể user cập nhật thông tin rồi mới nhắn
+            if (chatModel.participantIds[0] == CurrentUser.id) {
+                chatModel.participantNames[0] = CurrentUser.fullName
+                chatModel.participantImgUrls[0] = CurrentUser.imgUrl
+            } else {
+                chatModel.participantNames[1] = CurrentUser.fullName
+                chatModel.participantImgUrls[1] = CurrentUser.imgUrl
+            }
             messageRepo.sendMessage(chatModel, message)
         }
     }

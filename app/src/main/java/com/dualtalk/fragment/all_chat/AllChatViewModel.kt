@@ -36,6 +36,7 @@ class AllChatViewModel : ViewModel(), Observable {
                         i.id,
                         i.get("participantIds") as ArrayList<String>,
                         i.get("participantNames") as ArrayList<String>,
+                        i.get("participantImgUrls") as ArrayList<String>,
                         i.getString("sendId"),
                         i.getString("sendName"),
                         i.getString("latestMessage"),

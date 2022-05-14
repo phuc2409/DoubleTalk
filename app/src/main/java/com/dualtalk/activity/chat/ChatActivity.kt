@@ -29,7 +29,7 @@ class ChatActivity : AppCompatActivity() {
         viewModel.chatModel = gson.fromJson(intent.getStringExtra("json"), ChatModel::class.java)
         viewModel.startListener()
 
-        if (viewModel.chatModel.participantNames[0] == CurrentUser.fullName && viewModel.chatModel.participantNames.size > 1) {
+        if (viewModel.chatModel.participantIds[0] == CurrentUser.id && viewModel.chatModel.participantNames.size > 1) {
             textViewChatName.text = viewModel.chatModel.participantNames[1]
         } else {
             textViewChatName.text = viewModel.chatModel.participantNames[0]

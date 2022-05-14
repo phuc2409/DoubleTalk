@@ -38,6 +38,7 @@ class MessageRepo {
         val model = hashMapOf(
             "participantIds" to chatModel.participantIds,
             "participantNames" to chatModel.participantNames,
+            "participantImgUrls" to chatModel.participantImgUrls,
             "sendId" to CurrentUser.id,
             "sendName" to CurrentUser.fullName,
             "latestMessage" to "",
