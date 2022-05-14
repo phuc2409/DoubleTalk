@@ -14,6 +14,7 @@ import com.dualtalk.R
 import com.google.android.gms.tasks.OnSuccessListener
 import com.dualtalk.activity.forgotpassword.ForgotPasswordActivity
 import com.dualtalk.activity.main.MainActivity
+import com.dualtalk.common.Constant
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -65,7 +66,7 @@ class LoginActivity : AppCompatActivity() {
 //                    add user vào database sau khi đăng kí
                     val user = hashMapOf(
                         "email" to email.text.toString().trim(),
-                        "imgUrl" to "",
+                        "imgUrl" to Constant.defaultImgUrl,
                         "fullName" to email.text.toString().trim(),
                         "id" to ref.currentUser?.uid
                     )
