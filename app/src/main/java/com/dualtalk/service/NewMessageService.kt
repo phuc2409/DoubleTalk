@@ -28,7 +28,7 @@ class NewMessageService : Service() {
                         Log.d("Chat Service", "New: ${dc.document.data}")
                         val builder =
                             NotificationCompat.Builder(this, getString(R.string.channel_id))
-                                .setSmallIcon(R.drawable.ic_send)
+                                .setSmallIcon(R.drawable.ic_message)
                                 .setContentTitle(dc.document.data["sendName"].toString())
                                 .setContentText(dc.document.data["latestMessage"].toString())
                                 .setPriority(NotificationCompat.PRIORITY_MAX)
@@ -40,6 +40,13 @@ class NewMessageService : Service() {
             }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        val builder =
+            NotificationCompat.Builder(this, getString(R.string.channel_id))
+                .setSmallIcon(R.drawable.ic_message)
+                .setContentTitle("Double Talk")
+                .setContentText(CurrentUser.fullName)
+                .setPriority(NotificationCompat.PRIORITY_MIN)
+        startForeground(100, builder.build())
         return START_STICKY
     }
 
@@ -50,12 +57,5 @@ class NewMessageService : Service() {
     override fun onDestroy() {
         super.onDestroy()
         listenerRegistration.remove()
-    }
-
-    override fun onTaskRemoved(rootIntent: Intent?) {
-        val restartServiceIntent = Intent(applicationContext, this.javaClass)
-        restartServiceIntent.setPackage(packageName)
-        startService(restartServiceIntent)
-        super.onTaskRemoved(rootIntent)
     }
 }
