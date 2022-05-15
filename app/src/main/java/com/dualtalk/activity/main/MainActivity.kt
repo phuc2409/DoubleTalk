@@ -2,20 +2,34 @@ package com.dualtalk.activity.main
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.dualtalk.R
+import com.dualtalk.activity.chat.ChatActivity
+import com.dualtalk.activity.chat.ChatModel
 import com.dualtalk.fragment.setting.SettingFragment
 import com.dualtalk.fragment.all_chat.AllChatFragment
 import com.dualtalk.service.NewMessageService
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var viewModel: MainViewModel
+
+    private val receiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            val gson = Gson()
+            val chatModel = gson.fromJson(intent.getStringExtra("json"), ChatModel::class.java)
+            openChat(chatModel)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,6 +38,8 @@ class MainActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
         createNotificationChannel()
+
+        registerReceiver(receiver, IntentFilter("com.dualtalk.OPEN_CHAT"))
 
         viewModel.uiState.observe(this) {
             if (it == MainViewModel.MainState.Success) {
@@ -48,6 +64,15 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
+    }
+
+    private fun openChat(item: ChatModel?) {
+        val intent = Intent(this, ChatActivity::class.java)
+        val gson = Gson()
+        val json: String = gson.toJson(item)
+        intent.putExtra("json", json)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP
+        startActivity(intent)
     }
 
     private fun makeCurrentFragment(fragment: Fragment) {

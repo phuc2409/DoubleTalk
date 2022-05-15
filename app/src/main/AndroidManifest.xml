@@ -11,33 +11,44 @@
         android:roundIcon="@mipmap/ic_double_talk_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DualTalk">
-        <activity
-            android:name=".activity.editinfouser.EditInfoUserActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activity.searchuser.SearchUserActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activity.splashscreen.SplashActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
 
         <service
             android:name=".service.NewMessageService"
             android:enabled="true"
             android:exported="false" />
 
+        <receiver android:name=".receiver.NotificationReceiver" />
+
+        <activity
+            android:name=".activity.editinfouser.EditInfoUserActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".activity.searchuser.SearchUserActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".activity.splashscreen.SplashActivity"
+            android:exported="true">
+
+            <intent-filter>
+
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+
+            </intent-filter>
+
+        </activity>
+
         <activity
             android:name=".activity.forgotpassword.ForgotPasswordActivity"
             android:exported="false" />
+
         <activity
             android:name=".activity.chat.ChatActivity"
             android:exported="false" />
+
         <activity
             android:name=".activity.main.MainActivity"
             android:exported="false" />
@@ -45,6 +56,7 @@
         <activity
             android:name=".activity.login.LoginActivity"
             android:exported="false" />
+
     </application>
 
 </manifest>

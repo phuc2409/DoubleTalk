@@ -52,7 +52,7 @@ class AllChatFragment : Fragment(), IAllChatListener {
     }
 
     override fun doClickItemChat(item: ChatModel?) {
-        val intent = Intent(context, ChatActivity::class.java)
+        val intent = Intent(requireContext(), ChatActivity::class.java)
         val gson = Gson()
         val json: String = gson.toJson(item)
         intent.putExtra("json", json)
