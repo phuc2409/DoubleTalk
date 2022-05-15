@@ -31,6 +31,16 @@
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
+        tools:listitem="@layout/item_all_chat_horizontal" />
+
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -39,7 +49,7 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerViewHorizontal"
         tools:listitem="@layout/item_all_chat" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,18 +8,23 @@ import com.bumptech.glide.Glide
 import com.dualtalk.R
 import com.dualtalk.activity.chat.ChatModel
 import com.dualtalk.common.CurrentUser
-import com.dualtalk.helper.DateTimeHelper
-import kotlinx.android.synthetic.main.item_all_chat.view.*
+import kotlinx.android.synthetic.main.item_all_chat_horizontal.view.*
 
-class AllChatAdapter(
+/**
+ * User: Quang Phúc
+ * Date: 15-May-22
+ * Time: 01:57 PM
+ */
+class AllChatHorizontalAdapter(
     private val listener: IAllChatListener?,
     private val list: ArrayList<ChatModel>
 ) :
-    RecyclerView.Adapter<AllChatAdapter.ViewHolder>() {
+    RecyclerView.Adapter<AllChatHorizontalAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.item_all_chat, parent, false)
+            LayoutInflater.from(parent.context)
+                .inflate(R.layout.item_all_chat_horizontal, parent, false)
         return ViewHolder(view)
     }
 
@@ -45,14 +50,6 @@ class AllChatAdapter(
             Glide.with(itemView).load(item.participantImgUrls[position])
                 .into(itemView.circleImgView)
             itemView.tvName?.text = item.participantNames[position]
-            itemView.tvMessage?.text = item.latestMessage
-            if (item.updatedAt != null) {
-                itemView.tvUpdatedAt.text = DateTimeHelper.timestampToDateTimeString(item.updatedAt)
-            }
         }
     }
-}
-
-interface IAllChatListener {
-    fun doClickItemChat(item: ChatModel?)
 }

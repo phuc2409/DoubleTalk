@@ -18,6 +18,7 @@ import kotlinx.android.synthetic.main.fragment_all_chat.*
 class AllChatFragment : Fragment(), IAllChatListener {
     private lateinit var viewModel: AllChatViewModel
     private var allChatAdapter: AllChatAdapter? = null
+    private var allChatHorizontalAdapter: AllChatHorizontalAdapter? = null
     private lateinit var searchBar: TextView
 
     override fun onCreateView(
@@ -38,11 +39,14 @@ class AllChatFragment : Fragment(), IAllChatListener {
 
     private fun setupView() {
         allChatAdapter = AllChatAdapter(this, viewModel.model)
+        allChatHorizontalAdapter = AllChatHorizontalAdapter(this, viewModel.model)
 
         viewModel.uiState.observe(viewLifecycleOwner) {
             if (it == AllChatViewModel.AllChatState.Update) {
                 allChatAdapter = AllChatAdapter(this, viewModel.model)
+                allChatHorizontalAdapter = AllChatHorizontalAdapter(this, viewModel.model)
                 recyclerView.adapter = allChatAdapter
+                recyclerViewHorizontal.adapter = allChatHorizontalAdapter
             }
         }
     }
