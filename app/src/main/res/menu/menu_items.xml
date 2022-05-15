@@ -4,12 +4,7 @@
     <item
         android:id="@+id/doanchat"
         android:icon="@drawable/ic_baseline_message_24"
-        android:title="Đoạn Chat" />
-
-    <!--    <item-->
-    <!--        android:id="@+id/tincho"-->
-    <!--        android:icon="@drawable/ic_baseline_access_time_24"-->
-    <!--        android:title="Tin Nhắn Chờ" />-->
+        android:title="Chat" />
 
     <item
         android:id="@+id/settings"
