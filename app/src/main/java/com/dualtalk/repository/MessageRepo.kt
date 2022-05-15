@@ -30,6 +30,29 @@ class MessageRepo {
             }
     }
 
+    fun getChatIdByParticipantIds(
+        participantIds: ArrayList<String>,
+        onSuccess: (String) -> Unit,
+        onError: () -> Unit
+    ) {
+        database.collection("chats").whereEqualTo("participantIds", participantIds).get()
+            .addOnSuccessListener { documents ->
+                if (documents.isEmpty) {
+                    onSuccess("")
+                } else {
+                    for (document in documents) {
+                        Log.d("Get chatId", "${document.id} => ${document.data}")
+                        onSuccess(document.id)
+                        break
+                    }
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.w("Get chatId", "Error getting documents: ", exception)
+                onError()
+            }
+    }
+
     fun createChat(
         chatModel: ChatModel,
         onSuccess: (newChatId: String) -> Unit,

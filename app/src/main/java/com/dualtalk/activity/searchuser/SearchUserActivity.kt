@@ -6,6 +6,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
+import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
@@ -16,7 +17,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.dualtalk.R
 import com.dualtalk.activity.chat.ChatActivity
 import com.dualtalk.activity.chat.ChatModel
-import com.dualtalk.common.CurrentUser
 import com.dualtalk.databinding.ActivitySearchUserBinding
 import com.google.gson.Gson
 
@@ -47,9 +47,20 @@ class SearchUserActivity : AppCompatActivity(), ISearchUserListener {
         ////////////////////////
 
         viewModel.uiState.observe(this) {
-            if (it == SearchUserViewModel.SearchUserState.Success) {
-                searchUserAdapter = SearchUserAdapter(this, viewModel.mlist, this)
-                rcvUser.adapter = searchUserAdapter
+            when (it) {
+                is SearchUserViewModel.SearchUserState.Success -> {
+                    searchUserAdapter = SearchUserAdapter(this, viewModel.mlist, this)
+                    rcvUser.adapter = searchUserAdapter
+                }
+                is SearchUserViewModel.SearchUserState.Fail -> {
+
+                }
+                is SearchUserViewModel.SearchUserState.GetChatIdSuccess -> {
+                    openChat(it.chatModel)
+                }
+                is SearchUserViewModel.SearchUserState.GetChatIdError -> {
+                    Toast.makeText(this, "Open chat error", Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }
@@ -76,53 +87,15 @@ class SearchUserActivity : AppCompatActivity(), ISearchUserListener {
 
     override fun onClickItem(item: MUser?) {
         item?.let {
-            val participantIds = arrayListOf(CurrentUser.id, item.id)
-            participantIds.sort()
-            val participantNames = ArrayList<String>()
-            val participantImgUrls = ArrayList<String>()
-            if (CurrentUser.id == participantIds[0]) {
-                participantNames.add(CurrentUser.fullName)
-                participantImgUrls.add(CurrentUser.imgUrl)
-                item.fullName?.let {
-                    participantNames.add(it)
-                } ?: run {
-                    participantNames.add("")
-                }
-                item.imgUrl?.let {
-                    participantImgUrls.add(it)
-                } ?: run {
-                    participantImgUrls.add("")
-                }
-            } else {
-                item.fullName?.let {
-                    participantNames.add(it)
-                } ?: run {
-                    participantNames.add("")
-                }
-                item.imgUrl?.let {
-                    participantImgUrls.add(it)
-                } ?: run {
-                    participantImgUrls.add("")
-                }
-                participantNames.add(CurrentUser.fullName)
-                participantImgUrls.add(CurrentUser.imgUrl)
-            }
-            val chatModel =
-                ChatModel(
-                    id = "",
-                    participantIds,
-                    participantNames,
-                    participantImgUrls,
-                    CurrentUser.id,
-                    "",
-                    null
-                )
-
-            val intent = Intent(this, ChatActivity::class.java)
-            val gson = Gson()
-            val json: String = gson.toJson(chatModel)
-            intent.putExtra("json", json)
-            startActivity(intent)
+            viewModel.getChatId(item)
         }
+    }
+
+    private fun openChat(chatModel: ChatModel) {
+        val intent = Intent(this, ChatActivity::class.java)
+        val gson = Gson()
+        val json: String = gson.toJson(chatModel)
+        intent.putExtra("json", json)
+        startActivity(intent)
     }
 }
