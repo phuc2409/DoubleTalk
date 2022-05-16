@@ -44,9 +44,9 @@ class SearchUserActivity : AppCompatActivity(), ISearchUserListener {
         viewModel.getListUser()
 
         //gạch dưới chân mỗi User
-        val itemDecoration: RecyclerView.ItemDecoration =
-            DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
-        rcvUser.addItemDecoration(itemDecoration)
+//        val itemDecoration: RecyclerView.ItemDecoration =
+//            DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
+//        rcvUser.addItemDecoration(itemDecoration)
         ////////////////////////
 
 

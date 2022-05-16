@@ -46,8 +46,8 @@
             android:id="@+id/rcv_searchUser"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/tool_bar_outside">
-
+            android:layout_below="@id/tool_bar_outside"
+            android:paddingTop="10sp">
         </androidx.recyclerview.widget.RecyclerView>
     </RelativeLayout>
 </layout>
