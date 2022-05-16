@@ -5,10 +5,13 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.Menu
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
+import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -32,8 +35,8 @@ class SearchUserActivity : AppCompatActivity(), ISearchUserListener {
         databiding = DataBindingUtil.setContentView(this, R.layout.activity_search_user)
         viewModel = ViewModelProvider(this).get(SearchUserViewModel::class.java)
         //add toolbar
-        val toolbar = findViewById<Toolbar>(R.id.search_user_toolbar)
-        setSupportActionBar(toolbar)
+//        val toolbar = findViewById<Toolbar>(R.id.search_user_toolbar)
+//        setSupportActionBar(toolbar)
 
         val linearLayoutManager = LinearLayoutManager(this)
         rcvUser = findViewById(R.id.rcv_searchUser)
@@ -45,6 +48,9 @@ class SearchUserActivity : AppCompatActivity(), ISearchUserListener {
             DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
         rcvUser.addItemDecoration(itemDecoration)
         ////////////////////////
+
+
+
 
         viewModel.uiState.observe(this) {
             when (it) {
@@ -63,27 +69,46 @@ class SearchUserActivity : AppCompatActivity(), ISearchUserListener {
                 }
             }
         }
-    }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.search_user_menu, menu)
-        val searchManager: SearchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
-        searchView = menu?.findItem(R.id.actionsearch)?.actionView as SearchView
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName))
 
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                searchUserAdapter.filter.filter(query)
-                return false
+
+        databiding.searchUserToolbar.addTextChangedListener(object : TextWatcher{
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                //searchUserAdapter.filter.filter(p0)
             }
 
-            override fun onQueryTextChange(newText: String?): Boolean {
-                searchUserAdapter.filter.filter(newText)
-                return false
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                //searchUserAdapter.filter.filter(p0)
             }
+
+            override fun afterTextChanged(p0: Editable?) {
+                searchUserAdapter.filter.filter(p0.toString())
+            }
+
         })
-        return true
     }
+
+//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+//        menuInflater.inflate(R.menu.search_user_menu, menu)
+//        val searchManager: SearchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
+//        searchView = menu?.findItem(R.id.actionsearch)?.actionView as SearchView
+//        searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName))
+//
+//        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+//            override fun onQueryTextSubmit(query: String?): Boolean {
+//                searchUserAdapter.filter.filter(query)
+//                return false
+//            }
+//
+//            override fun onQueryTextChange(newText: String?): Boolean {
+//                searchUserAdapter.filter.filter(newText)
+//                return false
+//            }
+//        })
+//        return true
+//    }
+
+
 
     override fun onClickItem(item: MUser?) {
         item?.let {

@@ -9,9 +9,30 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/tool_bar_outside">
-            <include
+
+<!--            <include-->
+<!--                android:id="@+id/search_user_toolbar"-->
+<!--                layout="@layout/search_user_toolbar" />-->
+            <Button
+                android:id="@+id/backtoAllchatFragment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Back"
+                android:textSize="26sp" />
+
+            <EditText
                 android:id="@+id/search_user_toolbar"
-                layout="@layout/search_user_toolbar"/>
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10sp"
+                android:layout_marginEnd="16sp"
+                android:layout_toEndOf="@+id/backtoAllchatFragment"
+                android:drawableLeft="@drawable/icons8_search_30"
+                android:inputType="text"
+                android:maxLines="1"
+                android:paddingStart="8sp"
+                android:hint="Find User..."
+                android:textSize="16sp" />
         </RelativeLayout>
 
 
