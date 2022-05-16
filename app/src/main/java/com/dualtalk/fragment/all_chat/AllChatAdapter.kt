@@ -45,7 +45,11 @@ class AllChatAdapter(
             Glide.with(itemView).load(item.participantImgUrls[position])
                 .into(itemView.circleImgView)
             itemView.tvName?.text = item.participantNames[position]
-            itemView.tvMessage?.text = item.latestMessage
+            if (position == 0) {
+                itemView.tvMessage?.text = "You: ${item.latestMessage}"
+            } else {
+                itemView.tvMessage?.text = item.latestMessage
+            }
             if (item.updatedAt != null) {
                 itemView.tvUpdatedAt.text = DateTimeHelper.timestampToDateTimeString(item.updatedAt)
             }
