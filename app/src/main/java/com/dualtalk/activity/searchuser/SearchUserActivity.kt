@@ -126,5 +126,6 @@ class SearchUserActivity : AppCompatActivity(), ISearchUserListener {
         val json: String = gson.toJson(chatModel)
         intent.putExtra("json", json)
         startActivity(intent)
+        finish()
     }
 }
