@@ -22,7 +22,7 @@
           android:layout_marginTop="25dp"
           android:scaleType="centerCrop"
           app:strokeColor="@color/white"
-          android:src="@drawable/ic_gg" />
+          android:src="@drawable/logo" />
 
       <TextView
           android:id="@+id/txtUsername"

@@ -53,7 +53,7 @@
                 android:layout_height="100sp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="15sp"
-                android:src="@drawable/ic_gg"
+                android:src="@drawable/logo"
                 app:civ_border_width="2dp"
                 app:civ_border_color="#fff"/>
 

@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide
 import com.dualtalk.R
 import com.dualtalk.activity.editinfouser.EditInfoUserActivity
 import com.dualtalk.activity.login.LoginActivity
+import com.dualtalk.common.CurrentUser
 import com.dualtalk.service.NewMessageService
 import com.google.android.material.imageview.ShapeableImageView
 
@@ -48,32 +49,19 @@ class SettingFragment : Fragment() {
         }
         //xử lý hiển thị ảnh , thông tin người dùng
         UserAvartar = mview.findViewById(R.id.avartar)
+        Glide.with(requireContext()).load(CurrentUser.imgUrl).into(UserAvartar)
+
         btnEditInfoUser = mview.findViewById(R.id.chinhsuathongtin)
         txtusername = mview.findViewById(R.id.txtUsername)
-        viewModel.getInfoUser()
+
+        txtusername.text = CurrentUser.fullName
+
         btnEditInfoUser.setOnClickListener {
             val intent = Intent(activity, EditInfoUserActivity::class.java)
             startActivity(intent)
         }
 
-        viewModel.uiState.observe(viewLifecycleOwner) {
-            if (it == SettingFragmentViewModel.ChooseImageAvatar.Success) {
-                Toast.makeText(
-                    mview.context,
-                    "Up anh thanh cong va link anh la ${viewModel.urlUserAvartar} ",
-                    Toast.LENGTH_SHORT
-                ).show()
-            } else if (it == SettingFragmentViewModel.ChooseImageAvatar.getinfoSucess) {
-                getInfo(mview, UserAvartar, txtusername)
-            } else {
-                Toast.makeText(mview.context, "Up anh ko thanh cong", Toast.LENGTH_SHORT).show()
-            }
-        }
-        UserAvartar.setOnClickListener {
-            Toast.makeText(requireContext(), "click", Toast.LENGTH_SHORT).show()
-
-        }
-
+        viewModel.uiState.observe(viewLifecycleOwner) {}
 
         return mview
     }

@@ -4,10 +4,13 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
 import com.dualtalk.R
 import com.dualtalk.common.CurrentUser
 import com.dualtalk.databinding.ActivityEditInfoUserBinding
@@ -20,7 +23,7 @@ class EditInfoUserActivity : AppCompatActivity() {
     private var mUri = Uri.EMPTY
     val useravartar = registerForActivityResult(ActivityResultContracts.GetContent()) {
         dataBiding.edtEditInfoImg.setImageURI(it) // ở front end
-        if(it != null){
+        if (it != null) {
             this.mUri = it
 
         }
@@ -34,11 +37,18 @@ class EditInfoUserActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this).get(EditInfoUserViewModel::class.java)
         loadingDialog = LoadingDialog(this@EditInfoUserActivity)
 
+        dataBiding.edtEditInfoFullname.setText(CurrentUser.fullName, TextView.BufferType.EDITABLE)
+        Glide.with(this).load(CurrentUser.imgUrl).into(dataBiding.edtEditInfoImg)
         dataBiding.edtEditInfoBtn.setOnClickListener {
-            if(dataBiding.edtEditInfoFullname.text.toString().isNullOrBlank() || this.mUri == Uri.EMPTY){
-                Toast.makeText(this , "Please enter your name and choose a new avatar!!" , Toast.LENGTH_SHORT).show()
-            }
-            else{
+            if (dataBiding.edtEditInfoFullname.text.toString()
+                    .isBlank() || this.mUri == Uri.EMPTY
+            ) {
+                Toast.makeText(
+                    this,
+                    "Please enter your name and choose a new avatar!!",
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else {
                 viewModel.UpdateInfoUser(dataBiding.edtEditInfoFullname.text.toString())
                 viewModel.UpLoadAvartarToClound(this.mUri)
                 loadingDialog.startLoadingDialog()
