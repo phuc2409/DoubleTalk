@@ -86,6 +86,10 @@ class SearchUserActivity : AppCompatActivity(), ISearchUserListener {
             }
 
         })
+
+        databiding.backtoAllchatFragment.setOnClickListener {
+            finish()
+        }
     }
 
 //    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
