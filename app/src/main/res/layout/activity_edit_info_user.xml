@@ -7,7 +7,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#1D2D50"
+        android:background="@drawable/background_gradient"
         tools:context=".activity.editinfouser.EditInfoUserActivity">
 
 
@@ -32,14 +32,13 @@
                 android:layout_width="240sp"
                 android:layout_height="wrap_content"
                 android:inputType="text"
-                android:background="#1E5F74"
-                android:textColor="#fff"
+                android:background="#fff"
+                android:textColor="#000"
                 android:textSize="14sp"
                 android:hint="Your name"
                 android:maxLines="1"
                 android:drawableLeft="@drawable/icons8_user_35"
-                android:layout_gravity="center_horizontal"
-                android:textColorHint="#90FFFFFF"/>
+                android:layout_gravity="center_horizontal" />
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/edt_EditInfo_img"
@@ -59,7 +58,7 @@
                 android:layout_gravity="center"
                 android:textSize="14sp"
                 android:layout_marginTop="8sp"
-                android:backgroundTint="#00A8CC"/>
+                android:backgroundTint="#000"/>
         </LinearLayout>
 
     </RelativeLayout>
