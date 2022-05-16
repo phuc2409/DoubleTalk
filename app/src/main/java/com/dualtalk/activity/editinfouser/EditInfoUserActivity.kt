@@ -69,5 +69,9 @@ class EditInfoUserActivity : AppCompatActivity() {
                 finish()
             }
         }
+
+        dataBiding.backtomainactivity.setOnClickListener {
+            finish()
+        }
     }
 }
