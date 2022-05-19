@@ -46,7 +46,6 @@ class SplashActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         } else {
-            Toast.makeText(this, "Thành Công ", Toast.LENGTH_SHORT).show()
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         }

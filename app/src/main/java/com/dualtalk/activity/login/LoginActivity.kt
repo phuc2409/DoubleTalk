@@ -31,17 +31,15 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
         signUp.setOnClickListener {
             signUp.background = resources.getDrawable(R.drawable.switch_trcks, null)
-            signIn.background = null
+            signIn.background = resources.getDrawable(R.drawable.switch_trcks, null)
             signuplayout.visibility = View.VISIBLE
             loginlayout.visibility = View.GONE
-
         }
         signIn.setOnClickListener {
             signIn.background = resources.getDrawable(R.drawable.switch_trcks, null)
-            signUp.background = null
+            signUp.background = resources.getDrawable(R.drawable.switch_trcks, null)
             loginlayout.visibility = View.VISIBLE
             signuplayout.visibility = View.GONE
-
         }
         val email = findViewById<TextInputEditText>(R.id.signupemail)
         val password = findViewById<TextInputEditText>(R.id.signuppasword)
@@ -157,8 +155,6 @@ class LoginActivity : AppCompatActivity() {
             val name = user.displayName
             val email = user.email
             val Id = user.uid
-
-            Toast.makeText(this, "$name , $email , $Id", Toast.LENGTH_SHORT).show()
         }
     }
 }
