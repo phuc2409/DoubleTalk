@@ -23,6 +23,10 @@ class ForgotPasswordActivity : AppCompatActivity() {
             viewModel.SendLinkToResetPassword(email)
         }
 
+        dataBinding.forgotpassBtnback.setOnClickListener {
+            finish()
+        }
+
         viewModel.forgotpassState.observe(this) {
             if (it == ForgotPasswordViewModel.forgotPassState.Success) {
                 Toast.makeText(
