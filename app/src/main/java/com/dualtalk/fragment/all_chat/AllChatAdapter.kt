@@ -45,7 +45,7 @@ class AllChatAdapter(
             Glide.with(itemView).load(item.participantImgUrls[position])
                 .into(itemView.circleImgView)
             itemView.tvName?.text = item.participantNames[position]
-            if (position == 0) {
+            if (item.sendId == CurrentUser.id) {
                 itemView.tvMessage?.text = "You: ${item.latestMessage}"
             } else {
                 itemView.tvMessage?.text = item.latestMessage
