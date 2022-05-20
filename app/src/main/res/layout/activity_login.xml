@@ -105,7 +105,6 @@
                             android:id="@+id/email"
                             android:layout_width="match_parent"
                             android:layout_height="120px"
-                            android:background="@drawable/edittext_bg"
                             android:ems="10"
                             android:inputType="textEmailAddress"
                             android:textSize="13dp" />
@@ -130,7 +129,7 @@
                             android:id="@+id/pasword"
                             android:layout_width="match_parent"
                             android:layout_height="120px"
-                            android:background="@drawable/edittext_bg"
+
                             android:ems="10"
                             android:inputType="textPassword"
                             android:textSize="13dp" />
