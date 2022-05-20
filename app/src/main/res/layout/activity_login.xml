@@ -98,7 +98,7 @@
                         android:layout_marginBottom="5dp"
                         android:hint="Email"
                         app:boxStrokeColor="#B437CA"
-                        app:boxStrokeWidth="1dp"
+                        app:boxStrokeWidth="5dp"
                         app:shapeAppearanceOverlay="@style/Button4">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -121,7 +121,7 @@
                         android:layout_marginBottom="5dp"
                         android:hint="Password"
                         app:boxStrokeColor="#B437CA"
-                        app:boxStrokeWidth="1dp"
+                        app:boxStrokeWidth="5dp"
                         app:endIconMode="password_toggle"
                         app:shapeAppearanceOverlay="@style/Button4">
 
@@ -129,7 +129,6 @@
                             android:id="@+id/pasword"
                             android:layout_width="match_parent"
                             android:layout_height="120px"
-
                             android:ems="10"
                             android:inputType="textPassword"
                             android:textSize="13dp" />
@@ -183,14 +182,14 @@
                         android:layout_marginBottom="5dp"
                         android:hint="Email"
                         app:boxStrokeColor="#E88262"
-                        app:boxStrokeWidth="1dp"
+                        app:boxStrokeWidth="5dp"
                         app:shapeAppearanceOverlay="@style/Button4">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/signupemail"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/edittext_bg"
+
                             android:ems="10"
                             android:inputType="textEmailAddress"
                             android:textSize="13dp" />
@@ -207,7 +206,7 @@
                         android:layout_marginBottom="5dp"
                         android:hint="Password"
                         app:boxStrokeColor="#E88262"
-                        app:boxStrokeWidth="1dp"
+                        app:boxStrokeWidth="5dp"
                         app:endIconMode="password_toggle"
                         app:shapeAppearanceOverlay="@style/Button4">
 
@@ -215,7 +214,7 @@
                             android:id="@+id/signuppasword"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/edittext_bg"
+
                             android:ems="10"
                             android:inputType="textPassword"
                             android:textSize="13dp" />
@@ -232,7 +231,7 @@
                         android:layout_marginBottom="5dp"
                         android:hint="ConfirmPassword"
                         app:boxStrokeColor="#E88262"
-                        app:boxStrokeWidth="1dp"
+                        app:boxStrokeWidth="5dp"
                         app:endIconMode="password_toggle"
                         app:shapeAppearanceOverlay="@style/Button4">
 
@@ -240,7 +239,7 @@
                             android:id="@+id/signupretypepasword"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/edittext_bg"
+
                             android:ems="10"
                             android:inputType="textPassword"
                             android:textSize="13dp" />
