@@ -3,6 +3,7 @@ package com.dualtalk.activity.login
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.Color.parseColor
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -20,6 +21,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.type.Color
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
@@ -31,6 +33,8 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
         signUp.setOnClickListener {
             signUp.background = resources.getDrawable(R.drawable.switch_trcks, null)
+            signIn.setTextColor(getResources().getColor(R.color.white))
+            signUp.setTextColor(getResources().getColor(R.color.purple))
             signIn.background = resources.getDrawable(R.drawable.switch_trcks, null)
             signuplayout.visibility = View.VISIBLE
             loginlayout.visibility = View.GONE
@@ -38,6 +42,8 @@ class LoginActivity : AppCompatActivity() {
         signIn.setOnClickListener {
             signIn.background = resources.getDrawable(R.drawable.switch_trcks, null)
             signUp.background = resources.getDrawable(R.drawable.switch_trcks, null)
+            signIn.setTextColor(getResources().getColor(R.color.purple))
+            signUp.setTextColor(getResources().getColor(R.color.white))
             loginlayout.visibility = View.VISIBLE
             signuplayout.visibility = View.GONE
         }
